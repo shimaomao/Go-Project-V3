@@ -1,0 +1,8 @@
+<form action="/campaigns/{{ .AdscoopCampaign.ID }}/save" method="POST">
+<div ng-app="adscoopsCampaign" ng-controller="Main">
+{{ template "adscoops/clients/campaigns/schedule_settings" . }}
+{{ template "adscoops/clients/campaigns/type_zero" . }}
+{{ template "adscoops/clients/campaigns/javascript" . }}
+<script type="text/javascript">
+	$('#schedule_execute_edit').datetimepicker();
+</script>

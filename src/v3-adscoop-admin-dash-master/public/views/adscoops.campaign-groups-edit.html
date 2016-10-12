@@ -1,0 +1,30 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="AdscoopCampaignGroupsEdit" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="campaignGroup.Name"></h4>
+                </div>
+                <div class="modal-body">
+        					<div class="form-group">
+        						<label for="name" class="control-label">Name</label>
+        						<input type="text" name="name" ng-model="campaignGroup.Name" class="form-control">
+        					</div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="saveCampaignGroup()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

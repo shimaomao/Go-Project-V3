@@ -1,0 +1,66 @@
+					<input type="hidden" name="type" value="0">
+			{{ template "adscoops/clients/campaigns/general" . }}
+			{{ if eq .UserPolicy.UrlsHidden false }}
+			<div class="panel panel-default">
+				<div class="panel-heading">Urls</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<textarea class="form-control" ng-model="uNew" placeholder="Enter one URL per line to add or re-enable"></textarea>
+					</div>
+					<div class="form-group">
+						<span class="btn btn-primary" ng-click="addUrl()">Add</span>
+					</div>
+				</div>
+				<table class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<th width="90%">Active URL</th>
+							<th width="5%">Weight</th>
+							{{ if eq .UserPolicy.UrlsReadOnly false }}
+							<th width="5%" style="width:10px;">Remove</th>
+							{{ end }}
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="u in campaign.urls">
+							<td>
+								<span ng-bind="u.Url"></span>
+								<input type="hidden" name="url[]" ng-value="u.Url">
+							</td>
+							<td>
+								<input type="text" name="weight[]" ng-value="u.Weight" class="form-control" {{ if eq .UserPolicy.UrlsReadOnly true }}readonly{{ end }}>
+							</td>
+								{{ if eq .UserPolicy.UrlsReadOnly false }}
+							<td colspan="1">
+								<span class="btn btn-xs btn-danger" ng-click="removeUrl($index)">Remove</span>
+							</td>
+							{{ end }}
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-condensed table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Paused URL</th>
+							{{ if eq .UserPolicy.UrlsReadOnly false }}
+							<th style="width:10px;">Reactivate</th>
+							{{ end }}
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="u in campaign.all_urls">
+							<td>
+								<span ng-bind="u.Url"></span>
+							</td>
+								{{ if eq .UserPolicy.UrlsReadOnly false }}
+							<td colspan="1">
+								<span class="btn btn-xs btn-success" ng-click="reactivateUrl($index)">Reactivate URL</span>
+							</td>
+							{{ end }}
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			{{ end }}
+		</div>
+		</form>

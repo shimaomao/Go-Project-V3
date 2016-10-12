@@ -1,0 +1,40 @@
+
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+<div ng-controller="BroadvidAdsEmbedsViewallCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidads" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View All Embeds</h4>
+                </div>
+                <div class="modal-body">
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>ID</th>
+                				<th>Name</th>
+                                <th>&nbsp;</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="embed in ::embeds">
+                			    <td ng-bind="embed.ID"></td>
+                			    <td ng-bind="embed.Label"></td>
+                			    <td>
+                			    	<a ui-sref="admin.broadvidads.embeds-edit({id: embed.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

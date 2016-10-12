@@ -1,0 +1,27 @@
+<input type="hidden" name="campaign_id" value="{{ .AdscoopCampaign.CampaignID }}">
+<div class="panel panel-default">
+	<div class="panel-heading">Schedule Options
+	<input type="submit" value="Save Schedule" class="btn btn-primary btn-xs pull-right"></div>
+	<div class="panel-body">
+		<div class="form-group">
+			<label for="schedule_label">Schedule Label</label>
+			<input type="text" name="schedule_label" id="schedule_label" value="{{ .AdscoopCampaign.ScheduleLabel }}" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="schedule_execute_edit">Schedule Execute Time</label>
+			<input type="text" name="schedule_execute_edit" id="schedule_execute_edit" class="form-control" value="{{ FormatReadableTime .AdscoopCampaign.ScheduleExecute }}">
+		</div>
+
+		{{ if eq .UserPolicy.MacrosHidden false }}
+		<div class="form-group">
+			<label for="macro_settings">Macro Find</label>
+			<input type="text" name="macro_find" class="form-control" {{ if eq .UserPolicy.UrlsReadOnly true }}readonly{{ end }}>
+			<p>Default is [REPLACE_ME]</p>
+		</div>
+		<div class="form-group">
+			<label for="macro_settings">Macro Replace</label>
+			<input type="text" name="macro_replace" class="form-control" {{ if eq .UserPolicy.UrlsReadOnly true }}readonly{{ end }}>
+		</div>
+		{{ end }}
+	</div>
+</div>

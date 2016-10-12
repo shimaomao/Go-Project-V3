@@ -1,0 +1,81 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="BroadvidAdsEmbedsEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <form ng-submit="saveAdEmbed()">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidads" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="group.Name"></h4>
+                </div>
+                <div class="modal-body">
+
+                  <div class="form-group">
+                    <label for="AdEmbed">Label</label>
+                    <input type="text" ng-model="adembed.AdEmbedLabel" id="AdEmbed" value="" class="form-control">
+                		<label for="Embed">Embed</label>
+                    <p>{{ typeOfEmbedID }}</p>
+                		<select ng-model="adembed.EmbedID" id="embedID" class="form-control">
+                      <option value="0">Not selected</option>
+                      <option ng-repeat="e in embeds" value="{{ e.ID }}">{{ e.Label }}</option>
+                		</select>
+                		<label for="urls_whitelist" id="urls_whitelist" class="control-label">Whitelist specific URL's?</label>
+                		<select ng-model="adembed.UrlsWhitelist" id="urls_whitelist" class="form-control">
+                      <option value="0">Not selected</option>
+                      <option ng-repeat="u in UrlsWhitelist" value="{{ u.ID }}" ng-bind="u.Name"></option>
+                		</select>
+                		<label for="urls_blacklist" class="control-label">Blacklist specific URL's?</label>
+                		<select ng-model="adembed.UrlsBlacklist" id="urls_blacklist" class="form-control">
+                      <option value="0">Not selected</option>
+                      <option ng-repeat="u in UrlsBlacklist"  value="{{ u.ID }}" ng-bind="u.Name"></option>
+                		</select>
+
+                		<label for="countries_whitelist" id="urls_whitelist" class="control-label">Whitelist specific Countries?</label>
+                		<select ng-model="adembed.CountriesWhitelist" id="countries_whitelist" class="form-control">
+                      <option value="0">Not selected</option>
+                      <option ng-repeat="c in CountriesWhitelist" value="{{ c.ID }}" ng-bind="c.Name"></option>
+                		</select>
+
+                		<label for="forceSkip" class="form-label">Force Skip?</label>
+                		<select ng-model="adembed.ForceSkip" id="forceSkip" class="form-control">
+                			<option value="0" >False</option>
+                			<option value="1" >True</option>
+                		</select>
+                		<label for="forceSkipKey" class="form-label">Force Skip Key</label>
+                		<input type="text" ng-model="adembed.ForceSkipKey" id="forceSkipKey" class="form-control"  placeholder="utm_source">
+                		<label for="forceSkipValue" class="form-label">Force Skip Value</label>
+                		<input type="text" ng-model="adembed.ForceSkipValue" id="forceSkipValue" placeholder="value1,value2,value3" class="form-control">
+                		<label for="sort">Sort</label>
+                		<input type="text" ng-model="adembed.Sort" id="sort" value="" class="form-control">
+                		<label for="customField1">Custom Field 1</label>
+                				<input type="text" ng-model="adembed.CustomField1" id="customField1" class="form-control">
+                		<label for="customField2">Custom Field 2</label>
+                				<input type="text" ng-model="adembed.CustomField2" id="customField2" class="form-control">
+                		<label for="customField3">Custom Field 3</label>
+                				<input type="text" ng-model="adembed.CustomField3" id="customField3" class="form-control">
+                		<label for="customField4">Custom Field 4</label>
+                				<input type="text" ng-model="adembed.CustomField4" id="customField4" class="form-control">
+                		<label for="customField5">Custom Field 5</label>
+                				<input type="text" ng-model="adembed.CustomField5" id="customField5" class="form-control">
+                	</div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="admin.broadvidads.ads-edit({id: embedId})">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+
+        </form>
+
+                <div ui-view></div>
+
+</div><!-- /.modal -->

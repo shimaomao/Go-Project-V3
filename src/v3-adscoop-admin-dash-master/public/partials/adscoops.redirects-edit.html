@@ -1,0 +1,268 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="redirect.Name"></h4>
+                </div>
+                <div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="name">Name</label>
+								<input type="text" name="name" id="name" class="form-control" ng-model="redirect.Name">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="paused" id="paused" ng-model="redirect.Paused">
+										<span class="text">Paused?</span>
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<h4>Sort Method</h4>
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="sort_method"  value="0" ng-model="redirect.SortMethod">
+											<span class="text">Sorted</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="sort_method"  value="1" ng-model="redirect.SortMethod">
+											<span class="text">Parallel</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<h4>Scoring Method</h4>
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="scoring_method"  ng-model="redirect.BapiScoring" value="0">
+											<span class="text">No Scoring</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="scoring_method"  ng-model="redirect.BapiScoring" value="1">
+											<span class="text">Score Traffic with IAS BAPI</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="scoring_method"  ng-model="redirect.BapiScoring" value="2">
+											<span class="text">Score Traffic with Forensiq</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="scoring_method"  ng-model="redirect.BapiScoring" value="3">
+											<span class="text">Score Traffic with Moat</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="scoring_method"  ng-model="redirect.BapiScoring" value="4">
+											<span class="text">Score Traffic with IAS Traq</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<div class="form-group">
+								<h4>Redirect Option</h4>
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_method"  ng-model="redirect.Iframe" value="0">
+											<span class="text">No Redirects</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_method"  ng-model="redirect.Iframe" value="1">
+											<span class="text">Iframe</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_method"  ng-model="redirect.Iframe" value="2">
+											<span class="text">tracking.js</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<h4>Redirect Type</h4>
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="0">
+											<span class="text">Server-side redirect for iframe</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="1">
+											<span class="text">Client-side redirect for iframe (window.location)</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="2">
+											<span class="text">Client-side redirect for iframe (window.location.href)</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="3">
+											<span class="text">Client-side redirect for iframe (window.location.assign())</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="4">
+											<span class="text">Client-side redirect for iframe (window.location.replace())</span>
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="redirect_type" ng-model="redirect.RedirType" value="5">
+											<span class="text">Client-side redirect for iframe (meta refresh tag)</span>
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="redirect.ForceRefresh">
+										<span class="text">Force refresh if iframe detects changes?<br />
+										(Checks every 30 min)</span>
+									</label>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="bbsi_analytics">BBSI Analytics</label>
+								<input type="text" name="bbsi_analytics" ng-model="redirect.BbsiPath" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="force_host">Force Host for Redirect</label>
+									<select name="force_host" ng-model="redirect.ForceHost" class="form-control">
+										<option ng-repeat="h in hosts" value="{{ h.ID }}" ng-bind="h.Host"></option>
+									</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="auto_refresh_url_whitelist">Auto Refresh Whitelist URL's</label>
+								<select name="auto_refresh_url_whitelist" ng-model="redirect.LockWhitelistId" class="form-control">
+									<option value="u in lockUrls" value="{{ u.ID }}" ng-bind="u.Name"></option>
+								</select>
+							</div>
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="redirect.LockWhitelistReverse">
+										<span class="text">Use URL whitelist as blacklist?</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="auto_refresh_url_useragent">Auto Refresh Whitelist UA's</label>
+								<select name="auto_refresh_url_whitelist" ng-model="redirect.LockUseragentId" class="form-control">
+									<option value="u in lockUAs" value="{{ u.ID }}" ng-bind="u.Name"></option>
+								</select>
+							</div>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="redirect.LockUseragentReverse">
+										<span class="text">Use user agent whitelist as blacklist?</span>
+									</label>
+								</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" ng-model="redirect.AutoRefresh">
+										<span class="text">Auto Refresh page if iframe/tracking.js?</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="min">Iframe Auto Refresh Range (in seconds)</label>
+								<div class="input-group">
+									<input type="text" name="min" ng-model="redirects.Min" class="form-control">
+									<span class="input-group-addon">s</span>
+									<span class="input-group-addon">to</span>
+									<input type="text" name="max" ng-model="redirects.Max" class="form-control">
+									<span class="input-group-addon">s</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="allowed_query_strings">Allowed Query Strings</label>
+								<textarea name="allowed_query_strings" class="form-control" ng-model="newQueryString"></textarea>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="adscoops">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveRedirect()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

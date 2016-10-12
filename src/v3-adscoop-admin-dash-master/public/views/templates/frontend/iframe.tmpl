@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+		<style>
+			html,body { padding:0; margin:0; height:100%; width:100%;}
+			iframe { width:100%; height:100%; margin:0; padding:0;}
+		</style>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-53688614-3', 'none');
+		  ga('send', 'pageview');
+
+		</script>
+		{{ if eq .AdscoopRedirect.ForceRefresh true }}
+		<script>
+
+		setInterval(function() {
+		var request = new XMLHttpRequest();
+		request.open('GET', '/lastUpdated/{{ .AdscoopRedirect.Hash }}', true);
+
+		request.onload = function() {
+		  if (request.status >= 200 && request.status < 400) {
+		    if (request.responseText != "{{ .AdscoopRedirect.UpdatedAt.Unix }}") {
+		    	location.reload();
+		    }
+		  }
+		};
+
+		request.send();
+		}, (30 * 60 * 1000)) // 30 min delay
+		</script>
+		{{ end }}
+</head>
+<body>
+	{{ if eq .AdscoopRedirect.BustIframe true }}
+		<script type="text/javascript">
+if (top.location!= self.location) {
+		   top.location = self.location.href;
+		}
+		</script>
+	{{ end }}
+{{ if ne .AdscoopRedirect.BbsiPath "" }}
+
+
+
+{{ end }}
+	{{ if ne .BapiScoring ""}}
+
+	<script>
+		{{ if eq .BapiScoring "1"}}
+		var _slabel = "bapi"
+		{{ end }}
+		{{ if eq .BapiScoring "2"}}
+		var _slabel = "forensiq"
+		{{ end }}
+		{{ if eq .BapiScoring "3"}}
+		var _slabel = "moat"
+		{{ end }}
+
+		ga('send', 'event', (_slabel + '_scoring'), 'good', '{{ .AdscoopRedirect.Name }}',1);
+	</script>
+	{{ end }}
+	<iframe id="theiframe" name="theiframe" frameborder="0"></iframe>
+	<script>
+		iframe = document.getElementById('theiframe');
+
+		redirUrl = '/u/{{ .AdscoopRedirect.Hash }}{{ if ne .QueryString ""}}?{{ .QueryString }}{{ end }}';
+
+		function gotoIframe() {
+			{{ if ne .AdscoopRedirect.BbsiPath "" }}
+
+			{{ end }}
+			iframe.src = redirUrl
+		}
+
+		gotoIframe();
+
+		// Create IE + others compatible event handler
+		var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+		var eventer = window[eventMethod];
+		var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+		// Listen to message from child window
+		eventer(messageEvent,function(e) {
+			if (e.data == "adscoopsEventTracked") {
+				var img = document.createElement("img");
+				img.setAttribute("src", "/t/engagement?_cb=" + Math.random());
+				document.body.appendChild(img);
+			}
+		},false);
+
+
+	{{ if eq .AllowRefresh true }}
+	{{ if eq .AdscoopRedirect.AutoRefresh true }}
+		timeout = Math.floor(Math.random() * ({{ .AdscoopRedirect.Max}}-{{ .AdscoopRedirect.Min }})) + {{ .AdscoopRedirect.Min }} + 1;
+		setInterval( "gotoIframe()", (timeout * 1000))
+	{{ end }}
+	{{ end }}
+	</script>
+</body>
+</html>

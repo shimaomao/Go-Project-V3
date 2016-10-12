@@ -1,0 +1,46 @@
+<div class="widget">
+	<div class="widget-header">
+		<div class="widget-caption">Schedule Settings</div>
+	</div>
+	<div class="widget-body">
+		<div class="form-group">
+			<label for="schedule_label">Schedule Label</label>
+			<input type="text" name="schedule_label" id="schedule_label" class="form-control" ng-model="campaign.ScheduleLabel">
+		</div>
+		<div class="form-group">
+			<label for="schedule_execute_time">Schedule Execute Time</label>
+			<input type="text" name="schedule_execute_time" id="schedule_execute_time" class="form-control" ng-model="campaign.ScheduleExecuteTime">
+		</div>
+		<div class="form-group">
+			<label for="macro_find">Macro Find</label>
+			<input type="text" name="macro_find" id="macro_find" class="form-control" ng-model="campaign.MacroFind">
+		</div>
+		<div class="form-group">
+			<label for="macro_replace">Macro Replace</label>
+			<input type="text" name="macro_replace" id="macro_replace" class="form-control" ng-model="campaign.MacroReplace">
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="campaign.ScheduleQueued">
+							<span class="text">Queue to be approved?</span>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="campaign.SchedulePending">
+							<span class="text">Available to be edited by client?</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

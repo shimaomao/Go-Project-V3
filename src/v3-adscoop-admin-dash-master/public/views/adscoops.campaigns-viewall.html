@@ -1,0 +1,44 @@
+<div ng-controller="AdscoopCampaignsViewall" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View Campaigns</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <input type="search" placeholder="Filter by name" ng-model="search.Name" class="form-control">
+                    </div>
+                  </div>
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>ID</th>
+                				<th>Name</th>
+                                <th>&nbsp;</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="campaign in campaigns | filter: search">
+                			    <td ng-bind="campaign.ID"></td>
+                			    <td ng-bind="campaign.Name"></td>
+                			    <td>
+                			    	<a ui-sref="admin.adscoops.clients-edit.viewcampaigns.edit({id: campaign.ClientID, campaignid: campaign.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+                <div class="modal-footer">
+                    <button ng-show="clientID > 0" type="button" class="btn btn-default pull-left" ui-sref="admin.adscoops.clients-edit({ id: clientID })">Back to Client</button>
+                    <button ng-show="clientID > 0" type="button" class="btn btn-primary" ui-sref="admin.adscoops.clients-edit.viewcampaigns.new({ id: clientID })">New Campaign</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div ui-view></div>

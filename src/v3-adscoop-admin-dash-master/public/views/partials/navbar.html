@@ -1,0 +1,92 @@
+﻿<div class="navbar-inner" ng-controller="NavbarCtrl">
+    <div class="navbar-container">
+        <!-- Navbar Barnd -->
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <img src="assets/img/logo.png" ng-if="!settings.rtl" alt="" />
+                    <img src="assets/img/logo-rtl.png" ng-if="settings.rtl" alt="" />
+                </small>
+            </a>
+        </div>
+        <!-- /Navbar Barnd -->
+        <!-- Sidebar Collapse -->
+        <div class="sidebar-collapse"></div>
+        <!-- /Sidebar Collapse -->
+        <!-- Account Area and Settings --->
+        <div class="navbar-header pull-right">
+            <div class="navbar-account">
+                <ul class="account-area">
+                    <li>
+                        <a class=" dropdown-toggle" data-toggle="dropdown" title="Help" href="#">
+                            <i class="icon fa fa-warning"></i>
+                        </a>
+                        <!--Notification Dropdown-->
+                        <ul class="pull-right dropdown-menu dropdown-arrow dropdown-notifications">
+                            <li ng-repeat="message in messages">
+                                <a href="#">
+                                    <div class="clearfix">
+                                        <div class="notification-icon">
+                                            <i class="fa fa-phone bg-themeprimary white"></i>
+                                        </div>
+                                        <div class="notification-body">
+                                            <span class="title">{{ message.title }}</span>
+                                            <span class="description">{{ message.message }}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--/Notification Dropdown-->
+                    </li>
+                    <li>
+                        <a class="login-area dropdown-toggle" data-toggle="dropdown">
+                            <div class="avatar" title="View your public profile">
+                                <img ng-src="{{ user.AvatarURL }}">
+                            </div>
+                            <section>
+                                <h2><span class="profile"><span ng-bind="user.Name"></span></span></h2>
+                            </section>
+                        </a>
+                        <!--Login Area Dropdown-->
+                        <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
+                            <li class="username"><a ng-bind="user.Name"></a></li>
+                            <li class="email"><a ng-bind="user.Email"></a></li>
+                            <!--Avatar Area-->
+                            <li>
+                                <div class="avatar-area">
+                                    <img ng-src="{{ user.AvatarURL }}" class="avatar">
+                                </div>
+                            </li>
+                            <!--Theme Selector Area-->
+                            <li class="theme-area">
+                                <ul class="colorpicker">
+                                    <li><a class="colorpick-btn" href="" style="background-color:#5DB2FF;" skin-changer rel="assets/css/skins/blue.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#2dc3e8;" skin-changer rel="assets/css/skins/azure.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#03B3B2;" skin-changer rel="assets/css/skins/teal.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#53a93f;" skin-changer rel="assets/css/skins/green.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#FF8F32;" skin-changer rel="assets/css/skins/orange.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#cc324b;" skin-changer rel="assets/css/skins/pink.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#AC193D;" skin-changer rel="assets/css/skins/darkred.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#8C0095;" skin-changer rel="assets/css/skins/purple.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#0072C6;" skin-changer rel="assets/css/skins/darkblue.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#585858;" skin-changer rel="assets/css/skins/gray.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#474544;" skin-changer rel="assets/css/skins/black.min.css"></a></li>
+                                    <li><a class="colorpick-btn" href="" style="background-color:#001940;" skin-changer rel="assets/css/skins/deepblue.min.css"></a></li>
+                                </ul>
+                            </li>
+                            <!--/Theme Selector Area-->
+                            <li class="dropdown-footer">
+                                <a href="/auth/logout">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                        <!--/Login Area Dropdown-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /Account Area and Settings -->
+    </div>
+</div>

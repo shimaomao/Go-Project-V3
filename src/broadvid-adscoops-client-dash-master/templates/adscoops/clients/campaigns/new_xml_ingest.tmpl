@@ -1,0 +1,21 @@
+
+<div>		{{ if ne .AdscoopCampaign.ID 0 }}
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active">
+			<a href="#active" aria-controls="active" role="tab" data-toggle="tab">Active</a>
+		</li>
+		<li role="presentation">
+			<a href="#schedules" aria-controls="schedules" role="tab" data-toggle="tab">Schedules</a>
+		</li>
+	</ul>
+	{{ end }}
+
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active" id="active">
+		<form action="/clients/{{ .AdscoopCampaign.ClientID }}/campaigns/save" method="POST">
+		{{ template "adscoops/clients/campaigns/type_two" . }}
+	</div>
+	{{ template "adscoops/clients/campaigns/schedules" . }}
+</div>
+</div>
+{{ template "adscoops/clients/campaigns/javascript" . }}

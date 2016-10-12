@@ -1,0 +1,419 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="BroadvidAdsEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidads" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="group.Name"></h4>
+                </div>
+                <div class="modal-body">
+
+                  <div class="form-group">
+                  	<label for="label">Label</label>
+                  	<input type="text" ng-model="ad.Label" id="label" class="form-control" >
+                  </div>
+                  <div class="form-group">
+                  	<label for="type">Type</label>
+                  	<select ng-model="ad.Type" id="type" class="form-control">
+                  		<option value="1"  >In-Banner</option>
+                  		<option value="2" >vslider</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="targetDiv">Target Div</label>
+                  	<input type="text" ng-model="ad.TargetDiv" id="targetDiv" class="form-control">
+                  </div>
+
+                  <div class="form-group">
+                  	<label for="width">Width</label>
+                  	<input type="text" ng-model="ad.Width" id="width" class="form-control">
+                  </div>
+                  <div class="form-group">
+                  	<label for="height">Height</label>
+                  	<input type="text" ng-model="ad.Height" id="height" class="form-control">
+                  </div>
+                  <div class="form-group">
+                  	<label for="vsliderBottom">Vslider Bottom Override</label>
+                  	<input type="text" ng-model="ad.VsliderBottom" id="vsliderBottom" class="form-control">
+                  </div>
+                  <div class="form-group">
+                  	<label for="mute">Hide Close Button?</label>
+                  	<select ng-model="ad.HideCloseButton" id="track_analytics" class="form-control">
+                  		<option value="0"   >False</option>
+                  		<option value="1" >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="mute">Track Analytics?</label>
+                  	<select ng-model="ad.TrackAnalytics" id="track_analytics" class="form-control">
+                  		<option value="0"   >False</option>
+                  		<option value="1" >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="mute">Mute</label>
+                  	<select ng-model="ad.Mute" id="mute" class="form-control">
+                  		<option value="0" >False</option>
+                  		<option value="1"   >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="fire_tws_pixel">Fire TWS Pixel</label>
+                  	<select ng-model="ad.FireTwsPixel" id="fire_tws_pixel" class="form-control">
+                  		<option value="0"   >False</option>
+                  		<option value="1" >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="ajaxPageNav">AJAX Page Nav Support?</label>
+                  	<select ng-model="ad.AjaxPageNav" id="ajaxPageNav" class="form-control">
+                  		<option value="0"   >False</option>
+                  		<option value="1" >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="mute">Adon Tracking</label>
+                  	<select ng-model="ad.AdonTracking" id="adonTracking" class="form-control">
+                  		<option value="0"   >False</option>
+                  		<option value="1" >True</option>
+                  	</select>
+                  </div>
+                  <div class="form-group">
+                  	<label for="hideBorder">Hide Border?</label>
+                  	<select ng-model="ad.HideBorder" id="hideBorder" class="form-control">
+                  		<option value="0" >False</option>
+                  		<option value="1"   >True</option>
+                  	</select>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="desktop_override">Desktop Override Script?</label>
+                  			<select ng-model="ad.DesktopOverride" id="desktop_override" class="form-control">
+                  				<option value="0">No Override</option>
+
+                  				<option value="104" >inmobi</option>
+
+                  				<option value="106" >navio sportsmonster test</option>
+
+                  				<option value="110" >gossiptop video commander</option>
+
+                  			</select>
+                  		</div>
+                  	</div>
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="mobile_override">Mobile Override Script?</label>
+                  			<select ng-model="ad.MobileOverride" id="mobile_override" class="form-control">
+                  				<option value="0" >No Override</option>
+
+                  				<option value="104" >inmobi</option>
+
+                  				<option value="106" >navio sportsmonster test</option>
+
+                  				<option value="110" >gossiptop video commander</option>
+
+                  			</select>
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="backgroundColor">Gradient Top</label>
+                  			<input type="text" ng-model="ad.BackgroundColor" id="backgroundColor" class="form-control input-lg color">
+                  		</div>
+                  	</div>
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="borderColor">Gradient Bottom (Default Background for IE 9 and below)</label>
+                  			<input type="text" ng-model="ad.BorderColor" id="borderColor" class="form-control input-lg color">
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-12">
+                  		<div class="form-group">
+                  			<label for="noLoad" class="control-label">Enable "Do Not Load Unless"?</label>
+                  			<select ng-model="ad.NoLoad" id="noLoad" class="form-control">
+                  				<option value="0"   >False</option>
+                  				<option value="1" >True</option>
+                  			</select>
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="noLoadKey" class="control-label">"Do Not Load Unless" Key</label>
+                  			<input type="text" ng-model="ad.NoLoadKey" id="noLoadKey" class="form-control"  placeholder="utm_source">
+                  		</div>
+                  	</div>
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="noLoadValue" class="control-label">"Do Not Load Unless" Value</label>
+                  			<input type="text" ng-model="ad.NoLoadValue" id="noLoadValue" class="form-control"  placeholder="value1,value2,value3">
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-12">
+                  		<div class="form-group">
+                  			<label for="lock_whitelist_id">Force Reload URL Whitelist</label>
+                  			<select ng-model="ad.LockWhitelistID" id="lock_whitelist_id" class="form-control">
+                  				<option value="0" default>No Whitelist, allow all domains</option>
+
+                          <option ng-repeat="w in Whitelist"></option>
+
+                  			</select>
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-12">
+                  		<div class="form-group">
+                  			<label for="lock_useragent_id">Force Reload User Agent Whitelist</label>
+                  			<select ng-model="ad.LockUseragentID" id="lock_useragent_id" class="form-control">
+                  				<option value="0" default>No Whitelist, allow all user agents</option>
+
+                  				<option ng-repeat="u in UserAgents"></option>
+
+                  			</select>
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="forceReload" class="control-label">Force Reload?</label>
+                  			<select ng-model="ad.ForceReload" id="forceReload" class="form-control">
+                  				<option value="0"   >False</option>
+                  				<option value="1" >True</option>
+                  			</select>
+                  		</div>
+                  	</div>
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="forceReloadTimeout" class="control-label">Force Reload Timeout</label>
+                  			<input type="text" ng-model="ad.ForceReloadTimeout" id="forceReloadTimeout" class="form-control"  placeholder="">
+                  		</div>
+                  	</div>
+                  </div>
+                  <div class="row">
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="forceReloadKey" class="control-label">Force Reload Key</label>
+                  			<input type="text" ng-model="ad.ForceReloadKey" id="forceReloadKey" class="form-control"  placeholder="Default: utm_source">
+                  		</div>
+                  	</div>
+                  	<div class="col-md-6">
+                  		<div class="form-group">
+                  			<label for="forceReloadValue" class="control-label">Force Reload Value</label>
+                  			<input type="text" ng-model="ad.ForceReloadValue" id="forceReloadValue" class="form-control"  placeholder="value1,value2,value3">
+                  		</div>
+                  	</div>
+                  </div>
+
+                  <div class="form-group">
+                  	<div class="panel panel-default">
+                  	  <div class="panel-heading">
+                  	    <h3 class="panel-title">Ad Desktop <a ui-sref="admin.broadvidads.ads-edit.embeds-new({type:'1'})" class="btn btn-primary btn-xs pull-right" style="color:white;">Add</a></h3>
+                  	  </div>
+                  	  <div class="panel-body">
+
+                  	    <table class="table table-condensed">
+                  	    	<thead>
+                  	    		<tr>
+                  	    			<th style="width:10px;">ID</th>
+                  	    			<th style="width:10px;">Sort</th>
+                  	    			<th>Embed Label</th>
+                  	    			<th colspan="4" style="width:10px;">&nbsp;</th>
+                  	    		</tr>
+                  	    	</thead>
+                  	    	<tbody>
+
+                  	    		<tr ng-repeat="ae in ad.AdDesktop" ng-class="{'success': !ae.Pause, 'warning': ae.Pause}">
+                  	    			<td style="width:10px; text-align:center;" ng-bind="ae.EmbedID"></td>
+                  	    			<td style="width:10px; text-align:center;" ng-bind="ae.Sort"></td>
+                  	    			<td><span ng-bind="ae.AdEmbedLabel"></span> <a ui-sref="admin.broadvidads.embeds-edit({id: ae.EmbedID })" ng-bind="ae.EmbedLabel"></a></td>
+                  	    			<td style="width:10px;"><a ui-sref="admin.broadvidads.ads-edit.embeds-edit({ type: 'addesktop', embedId: ae.ID })" class="btn btn-success btn-xs">Edit</a></td>
+                  	    			<td style="width:10px;"><a class="btn btn-danger btn-xs" ng-click="removeAdEmbed(ae)">Remove</a></td>
+                  	    			<td style="width:10px;"><a ng-click="copyAdEmbed(ae)" class="btn btn-link btn-xs">Copy</a></td>
+                  	    			<td style="width:10px;"><a ng-click="pauseAdEmbed(ae)" class="btn btn-link btn-xs">
+                  	    			  <span ng-show="ae.Pause">Unpause</span>
+                  	    			  <span ng-show="!ae.Pause">Pause</span>
+                  	    			</a></td>
+                  	    		</tr>
+
+                  	    	</tbody>
+                  	    </table>
+                  	  </div>
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="panel panel-default">
+                  	  <div class="panel-heading">
+                  	    <h3 class="panel-title">Ad HTML5 <a ui-sref="admin.broadvidads.ads-edit.embeds-new({type:'2'})" class="btn btn-primary btn-xs pull-right" style="color:white;">Add</a></h3>
+                  	  </div>
+                  	  <div class="panel-body">
+
+                  	    <table class="table table-condensed">
+                  	    	<thead>
+                  	    		<tr>
+                  	    			<th style="width:10px;">ID</th>
+                  	    			<th style="width:10px;">Sort</th>
+                  	    			<th>Embed Label</th>
+                  	    			<th colspan="4" style="width:10px;">&nbsp;</th>
+                  	    		</tr>
+                  	    	</thead>
+                  	    	<tbody>
+
+                  	    		<tr ng-repeat="ae in ad.AdHTML5" ng-class="{'success': !ae.Pause, 'warning': ae.Pause}">
+                  	    			<td style="width:10px; text-align:center;" ng-bind="ae.EmbedID"></td>
+                  	    			<td style="width:10px; text-align:center;" ng-bind="ae.Sort"></td>
+                  	    			<td><span ng-bind="ae.AdEmbedLabel"></span> <a ui-sref="admin.broadvidads.embeds-edit({id: ae.EmbedID })" ng-bind="ae.EmbedLabel"></a></td>
+                  	    			<td style="width:10px;"><a ui-sref="admin.broadvidads.ads-edit.embeds-edit({ type: 'addesktop', embedId: ae.ID })" class="btn btn-success btn-xs">Edit</a></td>
+                  	    			<td style="width:10px;"><a class="btn btn-danger btn-xs" ng-click="removeAdEmbed(ae)">Remove</a></td>
+                  	    			<td style="width:10px;"><a ng-click="copyAdEmbed(ae)" class="btn btn-link btn-xs">Copy</a></td>
+                  	    			<td style="width:10px;"><a ng-click="pauseAdEmbed(ae)" class="btn btn-link btn-xs">
+                  	    			  <span ng-show="ae.Pause">Unpause</span>
+                  	    			  <span ng-show="!ae.Pause">Pause</span>
+                  	    			</a></td>
+                  	    		</tr>
+
+                  	    	</tbody>
+                  	    </table>
+                  	  </div>
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="panel panel-default">
+                  	  <div class="panel-heading">
+                  	    <h3 class="panel-title">Player Desktop <a ui-sref="admin.broadvidads.ads-edit.embeds-new({type:'3'})" class="btn btn-primary btn-xs pull-right" style="color:white;">Add</a></h3>
+                  	  </div>
+                  	  <div class="panel-body">
+
+                  	    <table class="table table-condensed">
+                  	    	<thead>
+                  	    		<tr>
+                  	    			<th style="width:10px;">ID</th>
+                  	    			<th style="width:10px;">Sort</th>
+                  	    			<th>Embed Label</th>
+                  	    			<th colspan="4" style="width:10px;">&nbsp;</th>
+                  	    		</tr>
+                  	    	</thead>
+                  	    	<tbody>
+
+
+
+                              <tr ng-repeat="ae in ad.PlayerDesktop" ng-class="{'success': !ae.Pause, 'warning': ae.Pause}">
+                                <td style="width:10px; text-align:center;" ng-bind="ae.EmbedID"></td>
+                                <td style="width:10px; text-align:center;" ng-bind="ae.Sort"></td>
+                                <td><span ng-bind="ae.AdEmbedLabel"></span> <a ui-sref="admin.broadvidads.embeds-edit({id: ae.EmbedID })" ng-bind="ae.EmbedLabel"></a></td>
+                                <td style="width:10px;"><a ui-sref="admin.broadvidads.ads-edit.embeds-edit({ type: 'addesktop', embedId: ae.ID })" class="btn btn-success btn-xs">Edit</a></td>
+                                <td style="width:10px;"><a class="btn btn-danger btn-xs" ng-click="removeAdEmbed(ae)">Remove</a></td>
+                                <td style="width:10px;"><a ng-click="copyAdEmbed(ae)" class="btn btn-link btn-xs">Copy</a></td>
+                                <td style="width:10px;"><a ng-click="pauseAdEmbed(ae)" class="btn btn-link btn-xs">
+                                  <span ng-show="ae.Pause">Unpause</span>
+                                  <span ng-show="!ae.Pause">Pause</span>
+                                </a></td>
+                              </tr>
+
+                  	    	</tbody>
+                  	    </table>
+                  	  </div>
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="panel panel-default">
+                  	  <div class="panel-heading">
+                  	    <h3 class="panel-title">Player HTML5 <a ui-sref="admin.broadvidads.ads-edit.embeds-new({type:'4'})" class="btn btn-primary btn-xs pull-right" style="color:white;">Add</a></h3>
+                  	  </div>
+                  	  <div class="panel-body">
+
+                  	    <table class="table table-condensed">
+                  	    	<thead>
+                  	    		<tr>
+                  	    			<th style="width:10px;">ID</th>
+                  	    			<th style="width:10px;">Sort</th>
+                  	    			<th>Embed Label</th>
+                  	    			<th colspan="4" style="width:10px;">&nbsp;</th>
+                  	    		</tr>
+                  	    	</thead>
+                  	    	<tbody>
+
+
+
+                              <tr ng-repeat="ae in ad.PlayerHTML5" ng-class="{'success': !ae.Pause, 'warning': ae.Pause}">
+                                <td style="width:10px; text-align:center;" ng-bind="ae.EmbedID"></td>
+                                <td style="width:10px; text-align:center;" ng-bind="ae.Sort"></td>
+                                <td><span ng-bind="ae.AdEmbedLabel"></span> <a ui-sref="admin.broadvidads.embeds-edit({id: ae.EmbedID })" ng-bind="ae.EmbedLabel"></a></td>
+                                <td style="width:10px;"><a ui-sref="admin.broadvidads.ads-edit.embeds-edit({ type: 'addesktop', embedId: ae.ID })" class="btn btn-success btn-xs">Edit</a></td>
+                                <td style="width:10px;"><a class="btn btn-danger btn-xs" ng-click="removeAdEmbed(ae)">Remove</a></td>
+                                <td style="width:10px;"><a ng-click="copyAdEmbed(ae)" class="btn btn-link btn-xs">Copy</a></td>
+                                <td style="width:10px;"><a ng-click="pauseAdEmbed(ae)" class="btn btn-link btn-xs">
+                                  <span ng-show="ae.Pause">Unpause</span>
+                                  <span ng-show="!ae.Pause">Pause</span>
+                                </a></td>
+                              </tr>
+
+                  	    	</tbody>
+                  	    </table>
+                  	  </div>
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="panel panel-default">
+                  	  <div class="panel-heading">
+                  	    <h3 class="panel-title">Default Tag <a ui-sref="admin.broadvidads.ads-edit.embeds-new({type:'5'})" class="btn btn-primary btn-xs pull-right" style="color:white;">Add</a></h3>
+                  	  </div>
+                  	  <div class="panel-body">
+
+                  	    <table class="table table-condensed">
+                  	    	<thead>
+                  	    		<tr>
+                  	    			<th style="width:10px;">ID</th>
+                  	    			<th style="width:10px;">Sort</th>
+                  	    			<th>Embed Label</th>
+                  	    			<th colspan="4" style="width:10px;">&nbsp;</th>
+                  	    		</tr>
+                  	    	</thead>
+                  	    	<tbody>
+
+
+                              <tr ng-repeat="ae in ad.DefaultTag" ng-class="{'success': !ae.Pause, 'warning': ae.Pause}">
+                                <td style="width:10px; text-align:center;" ng-bind="ae.EmbedID"></td>
+                                <td style="width:10px; text-align:center;" ng-bind="ae.Sort"></td>
+                                <td><span ng-bind="ae.AdEmbedLabel"></span> <a ui-sref="admin.broadvidads.embeds-edit({id: ae.EmbedID })" ng-bind="ae.EmbedLabel"></a></td>
+                                <td style="width:10px;"><a ui-sref="admin.broadvidads.ads-edit.embeds-edit({ type: 'addesktop', embedId: ae.ID })" class="btn btn-success btn-xs">Edit</a></td>
+                                <td style="width:10px;"><a class="btn btn-danger btn-xs" ng-click="removeAdEmbed(ae)">Remove</a></td>
+                                <td style="width:10px;"><a ng-click="copyAdEmbed(ae)" class="btn btn-link btn-xs">Copy</a></td>
+                                <td style="width:10px;"><a ng-click="pauseAdEmbed(ae)" class="btn btn-link btn-xs">
+                                  <span ng-show="ae.Pause">Unpause</span>
+                                  <span ng-show="!ae.Pause">Pause</span>
+                                </a></td>
+                              </tr>
+                  	    	</tbody>
+                  	    </table>
+                  	  </div>
+                  	</div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="admin.broadvidads">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveEmbed()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

@@ -1,0 +1,35 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Adscoops Client Dash</title>
+	<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<link rel="stylesheet" href="/css/signin.css">
+
+				<div class="container">
+					<form action="/logout" method="post" class="form-signin">
+						<h2 class="form-signin-heading">Warning!</h2>
+						
+						<p>You have updates that are still pending to be published, if this is not an error then please proceed to logout.  if you feel it is, then please go view pending changes.</p>
+
+						<a href="/" class="btn btn-default pull-left">View Pending Changes</a>
+						<button class="btn btn-primary pull-right">Logout</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

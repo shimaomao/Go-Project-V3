@@ -1,0 +1,7 @@
+<form action="save" method="POST">
+{{ template "adscoops/clients/campaigns/schedule_settings" . }}
+{{ template "adscoops/clients/campaigns/type_two" . }}
+{{ template "adscoops/clients/campaigns/javascript" . }}
+<script type="text/javascript">
+	$('#schedule_execute_edit').datetimepicker();
+</script>

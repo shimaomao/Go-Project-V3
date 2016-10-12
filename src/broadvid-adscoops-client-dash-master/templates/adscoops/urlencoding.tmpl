@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<div class="small-12 columns">
+			<form action="" method="post">
+				<h1 class="subheader">URL Encoding</h1>
+				<div class="form-group">
+					<label for="redir_page">Redir Page</label>
+					<input type="text" name="redir_page" id="redir_page" class="form-control" value="{{ .FormRedirPage }}">
+				</div>
+
+				<div class="form-group">
+					<label for="urls">Urls</label>
+					<textarea name="urls" id="urls" rows="20" class="form-control">{{ .FormUrls }}</textarea>
+				</div>
+
+				<div class="form-group">
+					<input type="submit" value="process" class="btn btn-primary">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+				<div class="form-group">
+						<div class="small-12 columns">
+<textarea name="urls" id="" cols="30" rows="10" class="form-control" readonly>{{ range .Urls }}{{ . }}
+{{ end }}</textarea>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>

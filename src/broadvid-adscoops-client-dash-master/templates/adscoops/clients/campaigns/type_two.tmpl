@@ -1,0 +1,16 @@
+
+<div ng-app="adscoopsCampaign" ng-controller="Main">
+<input type="hidden" name="type" value="2">
+	{{ template "adscoops/clients/campaigns/general" . }}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">XML Info</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label for="xml_url">XML Url</label>
+				<input type="text" name="xml_url" id="xml_url" class="form-control" value="{{ .AdscoopCampaign.XmlUrl }}">
+			</div>
+		</div>
+	</div>
+</div>
+</form>

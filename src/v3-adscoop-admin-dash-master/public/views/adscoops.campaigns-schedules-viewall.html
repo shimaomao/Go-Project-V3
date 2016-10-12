@@ -1,0 +1,43 @@
+
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+<div ng-controller="AdscoopCampaignSchedulesViewallCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.adscoops.clients-edit.viewcampaigns.edit" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View Campaign Schedules for <span ng-bind="campaign.Name"></span></h4>
+                </div>
+                <div class="modal-body">
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>ID</th>
+                				<th>Schedule Label</th>
+                				<th>Schedule Execute Time</th>
+                                <th>&nbsp;</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="c in ::campaignschedules">
+                			    <td ng-bind="c.ID"></td>
+                			    <td ng-bind="c.ScheduleLabel"></td>
+                			    <td ng-bind="c.ScheduleExecute"></td>
+                			    <td>
+                			    	<a ui-sref="admin.adscoops.clients-edit.viewcampaigns.edit.viewschedules.edit({campaignid: c.CampaignID, scheduleid: c.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div ui-view></div>

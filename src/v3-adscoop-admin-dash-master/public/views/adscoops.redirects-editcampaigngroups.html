@@ -1,0 +1,57 @@
+<style>
+  .modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+</style>
+<div ng-controller="AdscoopRedirectsEditCampaignGroupsCtrl">
+  <form ng-submit="saveCampaignGroup()">
+    <div class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" ui-sref="admin.adscoops.clients-edit({clientid: redirID })" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myLargeModalLabel">Edit Associated Redirect Campaign Groups</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="addCampaign">Add Campaign Group</label>
+              <p>
+                <select ng-model="addCampaignGroupIndex" class="form-control">
+                  <option  ng-repeat="c in campaignGroups" value="{{ $index }}">{{ c.Name }}</option>
+                </select>
+              </p>
+              <a ng-click="addCampaignGroup()" class="btn btn-primary">Add Campaign Group</a>
+            </div>
+            <table class="table table-condensed table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="c in asscCampaignGroups">
+                  <td ng-bind="c.CampaignGroupID"></td>
+                  <td ng-bind="c.Name"></td>
+                  <td>
+                    <a ng-click="removeCampaignGroup($index)" class="btn btn-danger pull-right btn-xs">Remove</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" value="Save" class="btn btn-primary">
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+  </form>
+</div>

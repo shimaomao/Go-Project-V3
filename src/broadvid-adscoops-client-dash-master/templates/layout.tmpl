@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Adscoops Client Dash</title>
+	<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+	<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="/bower_components/select2/dist/js/select2.full.min.js"></script>
+	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
+</head>
+<body>
+	{{ if ne .User.ID 0 }}
+	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="/">Manager</a>
+	    </div>
+	    <div id="navbar" class="navbar-collapse collapse">
+	    <ul class="nav navbar-nav">
+	       <li><a href="/">Campaigns</a></li>
+	       <li class="dropdown">
+	         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+	         <ul class="dropdown-menu">
+	           <li><a href="/url-encoding" target="_blank">URL Encoding</a></li>
+	         </ul>
+	       </li>
+	     </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="/logout">Logout {{ .User.Email }}</a></li>
+	      </ul>
+	     <p class="navbar-text pull-right">Welcome, {{ .User.Name }}</p>
+	    </div><!--/.nav-collapse -->
+	  </div>
+	</nav>
+
+	<style>
+	body {
+		padding-top:60px;
+	}
+	</style>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="wserror" class="alert alert-danger" style="display:none;">
+					<h5 class="text-center">Connection to server for stats has closed, please refresh the page browser to reconnect</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ if eq .User.IsBusinessHours false }}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="alert alert-warning">
+					<h5><strong>Off Business Hours</strong> - Updates require manual approval</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ end }}
+	{{ end }}
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{{ yield }}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

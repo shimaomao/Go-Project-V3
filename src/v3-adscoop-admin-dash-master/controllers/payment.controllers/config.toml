@@ -1,0 +1,7 @@
+MysqlConfig = "root:abc@/adscoops_ab?parseTime=true"
+StripeSecretKey = "sk_test_vncCBdQkyKdYK1SF56MNvyUn"
+StripePublishKey = "pk_test_QNSnBy9tx5hyNmUAOblGTe1t"
+MailGunDomain = "mg.adscoops.com"
+MailGunApiKey = "key-22a1cbbf6bbbec6d1f4a3fd7219f1486"
+MailGunPublicApiKey = "pubkey-40277136acd57b2aea204afab1ccba0c"
+AdminEmail = "pragya@techaheadcorp.com"

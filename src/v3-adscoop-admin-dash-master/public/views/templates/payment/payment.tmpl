@@ -1,0 +1,19 @@
+
+{{template "layout"}}
+
+<h1>Payments</h1>
+
+{{ if ne .Error "" }}
+<p><strong>Error: </strong> {{ .Error }}</p>
+{{ end }}
+<form action="" method="POST">
+    <input type="hidden" name="client_id" value="{{ .AdscoopClient.Id }}">
+    <input type="hidden" name="hash" value="{{ .AdscoopPaymentHash.Hash }}">
+    <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_QNSnBy9tx5hyNmUAOblGTe1t"
+            data-amount="{{ .AdscoopClient.ChargeAmount}}"
+            data-name="Adscoop"
+            data-description="Recurring Advertising Subscription">
+    </script>
+</form>

@@ -1,0 +1,278 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" ng-model="campaign.Name" class="form-control">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="CampaignGroupID">Campaign Group</label>
+      <select name="campaign_group_id" ng-model="campaign.CampaignGroupID" ui-select2 style="width:100%;">
+        <option value="0">No associated campaign group</option>
+        <option ng-repeat="h in campaignGroups" value="{{ h.CampaignGroupID }}">{{ h.Name }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="CampaignGroupWeight">Campaign Group Weight</label>
+      <input type="text" name="CampaignGroupWeight" ng-model="campaign.CampaignGroupWeight" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.AppendRc">
+          <span class="text">Append RC to URL?</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="name">Source</label>
+      <input type="text" class="form-control" ng-model="campaign.Source">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="name">Daily Budget</label>
+      <input type="text" class="form-control" ng-model="campaign.DailyImpsLimit">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="name">CPC</label>
+      <input type="text" class="form-control" ng-model="campaign.Cpc">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="name">Weight Variance</label>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="campaign.WeightVariance">
+        <span class="input-group-addon">%</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+      <label for="trackingMethod">Tracking Method</label>
+      <select name="trackingMethod" id="trackingMethod" ng-model="campaign.TrackingMethod" class="form-control" ng-disabled="campaign.ID > 0">
+        <option value="0">Clicks</option>
+        <option value="1">Verified</option>
+        <option value="2">Load</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.EnableUnloadTracking">
+          <span class="text">Enable Unload Tracking?</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.Paused">
+          <span class="text">Paused?</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.EnableSoftPause">
+          <span class="text">Enable Soft Pausing?<br />
+            <small>This allows a campaign to remain visible even if it's "done" for the day.</small>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.EnableCampaignQualityCheck">
+          <span class="text">Enable Mon Checking?</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="campaign.Inactive">
+          <span class="text">Inactive (hidden from view)?</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="widget-caption">Performance Based Metrics</div>
+      </div>
+      <div class="widget-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.PerformanceBasedPauseEnable">
+                  <span class="text">Enable Performance Based Pause?</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.PerformanceBasedPauseResume">
+                  <span class="text">Schedule to resume again at midnight?</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.PerformanceBasedNotifyOnly">
+                  <span class="text">Notify Only?</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="form-group">
+                      <label>Performance Based Compare A</label>
+                      <select ng-model="campaign.PerformanceBasedCompareA" class="form-control">
+                        <option value="0">Impressions</option>
+                        <option value="1">Loads</option>
+                        <option value="2">Verifications</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <label>Less Than</label>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <label>Percent Of</label>
+                      <input type="number" ng-model="campaign.PerformanceBasedPercent" class="form-control">
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <label>Of</label>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <label>Performance Based Compare B</label>
+                      <select ng-model="campaign.PerformanceBasedCompareB" class="form-control">
+                        <option value="0">Impressions</option>
+                        <option value="1">Loads</option>
+                        <option value="2">Verifications</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="widget">
+      <div class="widget-header">
+        <div class="widget-caption">Flight Information</div>
+      </div>
+      <div class="widget-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="start_datetime_edit">Start Date & Time (All Times in America/Los_Angeles timezone)</label>
+              <input type="datetime-local" ng-model="campaign.StartDatetime" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="end_datetime_edit">End Date & Time (All Times in America/Los_Angeles timezone)</label>
+              <input type="datetime-local" ng-model="campaign.EndDatetime" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.DisableStartTime">
+                  <span class="text">Disable Only Start Time</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.EnableStartStopTimes">
+                  <span class="text">Enable Flighting?</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="campaign.DisableEndTime">
+                  <span class="text">Disable Only End Time</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,261 @@
+<div class="page-breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="fa fa-home"></i>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="active">Adscoops</li>
+                </ul>
+            </div>
+            <!-- /Page Breadcrumb -->
+            <!-- Page Header -->
+            <div class="page-header position-relative">
+                <div class="header-title">
+                    <h1>
+                        Adscoops
+                    </h1>
+                </div>
+            </div>
+            <!-- /Page Header -->
+            <!-- Page Body -->
+            <div class="page-body">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="databox bg-white radius-bordered">
+                                <div class="databox-left bg-themesecondary">
+                                    <div class="databox-piechart">
+                                        <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="50" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">50%</span></div>
+
+                                    </div>
+                                </div>
+                                <div class="databox-right">
+                                    <span class="databox-number themesecondary" ng-bind="topStats.Impressions"></span>
+                                    <span class="databox-text darkgrey">Impressions Billed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="databox bg-white radius-bordered">
+                                <div class="databox-left bg-themethirdcolor">
+                                    <div class="databox-piechart">
+                                        <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="50" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">50%</span></div>
+
+                                    </div>
+                                </div>
+                                <div class="databox-right">
+                                    <span class="databox-number themethirdcolor" ng-bind="topStats.Limit"></span>
+                                    <span class="databox-text darkgrey">Impressions Required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="databox bg-white radius-bordered">
+                                <div class="databox-left bg-themeprimary">
+                                    <div class="databox-piechart">
+                                        <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="50" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">50%</span></div>
+
+                                    </div>
+                                </div>
+                                <div class="databox-right">
+                                    <span class="databox-number themeprimary">$<span  ng-bind="topStats.Revenue"></span></span>
+                                    <span class="databox-text darkgrey">Revenue</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="databox bg-white radius-bordered">
+                                <div class="databox-left bg-palegreen">
+                                    <div class="databox-piechart">
+                                        <div data-toggle="easypiechart" class="easyPieChart" data-barcolor="#fff" data-linecap="butt" data-percent="50" data-animate="500" data-linewidth="3" data-size="47" data-trackcolor="rgba(255,255,255,0.1)"><span class="white font-90">50%</span></div>
+
+                                    </div>
+                                </div>
+                                <div class="databox-right">
+                                    <span class="databox-number palegreen" >$<span ng-bind="topStats.eCPM"></span></span>
+                                    <span class="databox-text darkgrey">eCPM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                                            <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+                                                    <div class="databox-top bg-palegreen no-padding">
+                                                        <div class="databox-stat white bg-palegreen font-120">
+                                                            <i class="stat-icon fa fa-caret-down icon-xlg"></i>
+                                                        </div>
+                                                        <div class="horizontal-space space-lg"></div>
+                                                        <div class="databox-sparkline no-margin">
+                                                            <span ui-jq="sparkline" ui-options="[1,2,4,3,5,6,8,7,11,14,11,12], {type:'line', height:125, width:125, fillColor:'', lineColor:'{{settings.color.themeprimary}}', spotColor:'#fafafa', minSpotColor:'#fafafa' , maxSpotColor:'#ffce55', highlightSpotColor:'#ffce55' , highlightLineColor:'#ffce55', lineWidth:'1.5' , spotRadius:2 }"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="databox-bottom no-padding">
+                                                        <div class="databox-row">
+                                                            <div class="databox-cell cell-6 text-align-left">
+                                                                <span class="databox-text">Clicks</span>
+                                                                <span class="databox-number"><span ng-bind="statsVerticals.Clicks.Impressions"></span></span>
+                                                            </div>
+                                                            <div class="databox-cell cell-6 text-align-right">
+                                                                <span class="databox-text">Revenue</span>
+                                                                <span class="databox-number font-70">$<span ng-bind="statsVerticals.Clicks.Revenue"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+                                                    <div class="databox-top bg-orange no-padding">
+                                                        <div class="databox-stat white bg-orange font-120">
+                                                            <i class="stat-icon fa fa-caret-up icon-xlg"></i>
+                                                        </div>
+                                                        <div class="horizontal-space space-lg"></div>
+                                                        <div class="databox-sparkline no-margin">
+                                                            <span data-sparkline="compositebar" data-height="82px" data-width="100%"
+                                                                  data-barcolor="#fb7d64"
+                                                                  data-barwidth="10px" data-barspacing="5px"
+                                                                  data-fillcolor="false" data-linecolor="#fff" data-spotradius="3" data-linewidth="2"
+                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#fff"
+                                                                  data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
+                                                                  data-composite="7, 6, 5, 7, 9, 10, 8, 6,2,4,1,2,7">
+                                                                10,7,10,8,4,6, 6, 4, 7, 8 ,4,4,8
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="databox-bottom no-padding">
+                                                        <div class="databox-row">
+                                                            <div class="databox-cell cell-6 text-align-left">
+                                                                <span class="databox-text">Verified</span>
+                                                                <span class="databox-number"><span ng-bind="statsVerticals.Verification.Impressions"></span></span>
+                                                            </div>
+                                                            <div class="databox-cell cell-6 text-align-right">
+                                                                <span class="databox-text">Revenue</span>
+                                                                <span class="databox-number font-70">$<span ng-bind="statsVerticals.Verification.Revenue"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+                                                    <div class="databox-top bg-azure no-padding">
+                                                        <div class="databox-stat white bg-azure font-120">
+                                                            <i class="stat-icon fa fa-caret-up icon-xlg"></i>
+                                                        </div>
+                                                        <div class="horizontal-space space-lg"></div>
+                                                        <div class="databox-sparkline no-margin">
+                                                            <span data-sparkline="compositebar" data-height="82px" data-width="100%"
+                                                                  data-barcolor="#3bcbef"
+                                                                  data-barwidth="10px" data-barspacing="5px"
+                                                                  data-fillcolor="false" data-linecolor="#fff" data-spotradius="3" data-linewidth="2"
+                                                                  data-spotcolor="#fafafa" data-minspotcolor="#fafafa" data-maxspotcolor="#fff"
+                                                                  data-highlightspotcolor="#fff" data-highlightlinecolor="#fff"
+                                                                  data-composite="8,4,1,2,4,6,2,4,4,8,10,7,7">
+                                                                7, 6, 5, 7, 9, 10, 8, 7, 6, 6, 4, 7, 8
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="databox-bottom no-padding">
+                                                        <div class="databox-row">
+                                                            <div class="databox-cell cell-6 text-align-left">
+                                                                <span class="databox-text">Loads</span>
+                                                                <span class="databox-number"><span ng-bind="statsVerticals.Load.Impressions"></span></span>
+                                                            </div>
+                                                            <div class="databox-cell cell-6 text-align-right">
+                                                                <span class="databox-text">Revenue</span>
+                                                                <span class="databox-number font-70">$<span ng-bind="statsVerticals.Load.Revenue"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                                                    <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="widget">
+                                        <div class="widget-header bordered-bottom bordered-themesecondary">
+                                            <i class="widget-icon fa fa-tags themesecondary"></i>
+                                            <span class="widget-caption themesecondary">Clients</span>
+                                        </div><!--Widget Header-->
+                                        <div class="widget-body  no-padding">
+                                            <div class="tickets-container">
+                                                <ul class="tickets-list">
+                                                    <li class="ticket-item" ng-repeat="c in clients | orderBy: 'Paused'">
+                                                        <div class="row"  ng-click="clientInfo(c)">
+                                                            <div class="ticket-user col-lg-12 col-sm-12">
+                                                                <img src="assets/img/avatars/adam-jansen.jpg" class="user-avatar">
+                                                                <span class="user-name" ng-bind="c.Name"></span>
+                                                            </div>
+                                                            <div class="ticket-state bg-palegreen" ng-class="c.Paused ? 'bg-yellow' : 'bg-palegreen'">
+                                                                <i class="fa fa-info" ng-show="!c.Paused"></i>
+                                                                <i class="fa fa-times" ng-show="c.Paused"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div ng-show="c.ShowInfo == true">
+                                                            <div class="row bg-ivory">
+                                                                <div class="ticket-user col-lg-12 col-sm-12">
+                                                                    <span class="user-name">Reports</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row bg-ivory text-center" ng-show="c.Campaigns.length == 0">
+                                                                <p>Loading Campaigns...</p>
+                                                            </div>
+                                                            <div class="row" ng-repeat="cpn in c.Campaigns | orderBy: 'Paused'">
+                                                                <div class="ticket-user col-lg-2 col-sm-6">
+                                                                    <span class="user-name">
+                                                                        <a ui-sref="adscoops.clients-edit.viewcampaigns.edit({id: c.ID, campaignid: cpn.ID})" ng-bind="cpn.Name"></a>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="ticket-time col-lg-1 col-sm-1 col-xs-6">
+                                                                    <div class="widget-buttons buttons-bordered">
+                                                                        <label>
+                                                                            <input class="checkbox-slider toggle colored-blue" type="checkbox" ng-model="cpn.Paused" ng-true-value="false" ng-false-value="true" ng-click="showInfo(cpn);">
+                                                                            <span class="text"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ticket-time col-lg-2 col-sm-2 col-xs-12">
+                                                                    <div class="btn-group" role="group" aria-label="...">
+                                                                      <button type="button" class="btn btn-primary btn-xs" ng-click="cpn.TrackingMethod = '0'; showInfo(cpn);" ng-class="{active: cpn.TrackingMethod == '0'}">Clicks</button>
+                                                                      <button type="button" class="btn btn-primary btn-xs" ng-click="cpn.TrackingMethod = '1'; showInfo(cpn);" ng-class="{active: cpn.TrackingMethod == '1'}">Verifications</button>
+                                                                      <button type="button" class="btn btn-primary btn-xs" ng-click="cpn.TrackingMethod = '2'; showInfo(cpn);" ng-class="{active: cpn.TrackingMethod == '2'}">Loads</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ticket-time col-lg-3 col-sm-3 col-xs-6">
+                                                                    <div class="input-group input-group-xs">
+                                                                        <input type="text" class="form-control input-xs" ng-model="cpn.DailyImpsLimit" ng-blur="showInfo(cpn);">
+                                                                        <span class="input-group-addon bg-palegreen bordered-palegreen">imps</span>
+                                                                        <span class="input-group-addon bg-blue bordered-blue">CPC $</span>
+                                                                        <input type="text" class="form-control input-xs" ng-model="cpn.Cpc" ng-blur="showInfo(cpn);">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ticket-time col-lg-4 col-md-6 col-xs-6">
+                                                                    <div class="progress progress progress-striped">
+                                                                        <div class="progress-bar" style="width: {{ (cpn.Stats.DailyImps / cpn.DailyImpsLimit) * 100 }}%">
+                                                                            <span>{{ cpn.Stats.DailyImps }} / {{ cpn.DailyImpsLimit }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+            </div>
+
+            <div ui-view></div>

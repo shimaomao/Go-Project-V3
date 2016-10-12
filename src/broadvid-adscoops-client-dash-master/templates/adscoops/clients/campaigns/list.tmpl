@@ -1,0 +1,101 @@
+{{ $out := . }}
+<div class="row">
+	{{ if eq .EditedSchedules true }}
+	<div class="col-md-6">
+	{{ else }}
+	<div class="col-md-12">
+	{{ end }}
+		<div class="panel panel-default">
+			<div class="panel-heading">Campaigns
+			{{ if eq .UserPolicy.AddCopyCampaignEnabled true }}
+			<a href="/campaigns/new-campaign" class="btn btn-primary btn-xs pull-right">New</a>
+			{{ end }}
+			</div>
+			<table class="table table-condensed table-hover table-striped">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>Name</th>
+						<th>Campaign Group Weight</th>
+						<th style="text-align:right;">Today's Impressions</th>
+						{{ if eq .UserPolicy.AddCopyCampaignEnabled true }}
+						<th>&nbsp;</th>
+						{{ end }}
+					</tr>
+				</thead>
+				<tbody id="campaignList">
+					{{ template "adscoops/clients/campaigns/campaignList" . }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+		{{ if eq .EditedSchedules true }}
+	<div class="col-md-6">
+	{{ if ne .User.Policy.AutoApproveDelay 0}}
+		<div class="alert alert-warning">
+			<strong>Warning</strong> There will be a deplay between {{ .User.Policy.AutoApproveDelay }} - {{ Addition .User.Policy.AutoApproveDelay 5 }} minutes before the changes will take affect.
+		</div>
+	{{ end }}
+		<div class="panel panel-info">
+			<div class="panel-heading">Pending Updates
+			<a href="/publish-updates" class="btn btn-primary btn-xs pull-right">Request Approval</a></div>
+			<table class="table table-striped table-hover table-condensed">
+				<thead>
+					<tr>
+						<th>&nbsp;</th>
+						<th>Campaign Name</th>
+						<th>Schedule Label</th>
+						<th>Execute Time</th>
+					</tr>
+				</thead>
+				<tbody>
+						{{ range .ScheduledCampaigns }}
+
+						<tr>
+							{{ if ne .PendingSchedule 0 }}
+								<td>
+									<a href="/campaigns/{{ .ID }}/edit-schedule/{{ .PendingSchedule }}" class="btn btn-xs btn-info pull-left btn-block">Edit</a>
+								</td>
+								<td>{{ .Name }}</td>
+								<td>{{ .CampaignGroupWeight }}</td>
+								<td>{{ .ScheduleLabel }}</td>
+								<td>{{ FormatReadableTimeLosAngeles .ScheduleExecute }}</td>
+							{{ end }}
+							</tr>
+						{{ end }}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{{ end }}
+</div>
+
+<script>
+	$(function() {
+		var wshost = "ws";
+
+		if (location.protocol === 'https:') {
+			wshost = "wss"
+		}
+
+		var c=new WebSocket(wshost + '://' + window.location.host + '/wsupdates');
+			c.onopen = function(){
+			  c.onmessage = function(response){
+			  	if (response.data == "hi") {
+			  		return
+			  	}
+			  	msg = JSON.parse(response.data)
+			  	console.log("msg", msg)
+			  	if ((typeof msg == "object")
+			  			&& (msg.Type == "campaigns")) {
+			  		$('#campaignList').load("/?ajax=1");
+			  	}
+			  };
+		}
+
+		c.onclose = function() {
+			$('#wserror').show();
+		}
+	})
+</script>

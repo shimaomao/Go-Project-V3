@@ -1,0 +1,39 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+<div ng-controller="BroadvidAdsBlacklistUrlGroupsViewallCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidads" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View All groups</h4>
+                </div>
+                <div class="modal-body">
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>ID</th>
+                				<th>Name</th>
+                                <th>&nbsp;</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="group in ::groups">
+                			    <td ng-bind="group.ID"></td>
+                			    <td ng-bind="group.Name"></td>
+                			    <td>
+                			    	<a ui-sref="admin.broadvidads.blacklisturlgroups-edit({id: group.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

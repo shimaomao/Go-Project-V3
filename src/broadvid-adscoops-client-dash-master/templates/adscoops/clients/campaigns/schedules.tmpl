@@ -1,0 +1,28 @@
+<div role="tabpanel" class="tab-pane" id="schedules">
+	<table class="table table-condensed table-hover table-striped">
+		<thead>
+			<tr>
+				<th style="width:1%">&nbsp;</th>
+				<th style="width:20%">Scheduled Time</th>
+				<th>Label</th>
+				<th colspan="1">
+					<a href="/clients/{{ .AdscoopCampaign.ClientID }}/campaigns/{{ .AdscoopCampaign.ID }}/edit/schedule/new" class="btn btn-default btn-xs pull-right">New</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .AdscoopCampaignSchedules }}
+			<tr>
+				<td>
+					<a href="./edit/schedule/{{ .ID }}/edit" class="btn btn-info pull-left btn-xs">Edit</a>
+				</td>
+				<td>{{ FormatReadableTimeLosAngeles .ScheduleExecute }}</td>
+				<td>{{ .ScheduleLabel }}</td>
+				<td>
+					<a href="./edit/schedule/{{ .ID }}/delete" class="btn btn-danger pull-right btn-xs">Delete</a>
+				</td>
+			</tr>
+			{{ end }}
+		</tbody>
+	</table>
+</div>

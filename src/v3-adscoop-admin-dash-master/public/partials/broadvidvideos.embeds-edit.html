@@ -1,0 +1,61 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="broadvidvideos" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="embed.Label"></h4>
+                </div>
+                <div class="modal-body">
+					<div class="form-group">
+						<label for="label">Name</label>
+						<input type="text" name="name" id="name" ng-model="embed.Label" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="embed">Embed</label>
+						<textarea name="embed" id="embed" ng-model="embed.Embed" class="form-control"></textarea>
+					</div>
+
+					<div class="form-group">
+						<label for="CustomFieldLabel1">Custom Field Label 1</label>
+						<input type="text" name="CustomFieldLabel1" id="CustomFieldLabel1" ng-model="embed.CustomFieldLabel1" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="CustomFieldLabel2">Custom Field Label 2</label>
+						<input type="text" name="CustomFieldLabel2" id="CustomFieldLabel2" ng-model="embed.CustomFieldLabel2" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="CustomFieldLabel3">Custom Field Label 3</label>
+						<input type="text" name="CustomFieldLabel3" id="CustomFieldLabel3" ng-model="embed.CustomFieldLabel3" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="CustomFieldLabel4">Custom Field Label 4</label>
+						<input type="text" name="CustomFieldLabel4" id="CustomFieldLabel4" ng-model="embed.CustomFieldLabel4" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="CustomFieldLabel5">Custom Field Label 5</label>
+						<input type="text" name="CustomFieldLabel5" id="CustomFieldLabel5" ng-model="embed.CustomFieldLabel5" class="form-control">
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="broadvidvideos">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveEmbed()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

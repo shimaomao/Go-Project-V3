@@ -1,0 +1,24 @@
+<div ng-app="adscoopsCampaign" ng-controller="Main">
+<input type="hidden" name="type" value="1">
+
+	{{ template "adscoops/clients/campaigns/general" . }}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">XML Info</div>
+		<div class="panel-body">
+			<div class="form-group">
+				<label for="xml_url">XML Url</label>
+				<input type="text" name="xml_url" id="xml_url" class="form-control" value="{{ .AdscoopCampaign.XmlUrl }}">
+			</div>
+			<div class="form-group">
+				<label for="xml_type">XML Type</label>
+				<select name="xml_type" id="xml_type" class="form-control">
+					<option value="0" {{ if eq .AdscoopCampaign.XmlType 0 }}selected="SELECTED"{{ end }}>JemaMedia</option>
+					<option value="1" {{ if eq .AdscoopCampaign.XmlType 1 }}selected="SELECTED"{{ end }}>Ad.Net</option>
+					<option value="2" {{ if eq .AdscoopCampaign.XmlType 2 }}selected="SELECTED"{{ end }}>eZanga</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+</form>

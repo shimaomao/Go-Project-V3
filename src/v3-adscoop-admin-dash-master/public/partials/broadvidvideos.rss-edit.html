@@ -1,0 +1,148 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="broadvidvideos" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="rss.Label"></h4>
+                </div>
+                <div class="modal-body">
+					<div class="form-group">
+						<label for="label">Name</label>
+						<input type="text" name="name" id="name" ng-model="rss.Label" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="url">RSS URL</label>
+						<input type="text" name="url" id="url" ng-model="rss.RssUrl" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="type">Type</label>
+						<select name="type" id="type" ng-model="rss.Type" class="form-control">
+							<option value="1">Default</option>
+							<option value="2">Grab Media</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="customField1">Custom Field 1</label>
+						<input type="text" name="customField1" id="customField1" ng-model="rss.CustomField1" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="customField1">Custom Field 2</label>
+						<input type="text" name="customField1" id="customField1" ng-model="rss.CustomField2" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="customField3">Custom Field 3</label>
+						<input type="text" name="customField3" id="customField3" ng-model="rss.CustomField3" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="customField4">Custom Field 4</label>
+						<input type="text" name="customField4" id="customField4" ng-model="rss.CustomField4" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="customField5">Custom Field 5</label>
+						<input type="text" name="customField5" id="customField5" ng-model="rss.CustomField5" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="embedID">Embed</label>
+						<select name="embedID" id="embedID" ng-model="rss.EmbedID" class="form-control" ng-options="e.ID as e.Label for e in embeds">
+						</select>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="width">Width</label>
+								<input type="number" name="width" id="width" ng-model="rss.Width" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="height">Height</label>
+								<input type="number" name="height" id="height" ng-model="rss.Height" class="form-control">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="mute" id="mute" ng-model="rss.Mute">
+										<span class="text">Mute</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="autoplay" id="autoplay" ng-model="rss.AutoPlay">
+										<span class="text">Auto Play</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="onetimepull" id="onetimepull" ng-model="rss.OneTimePull">
+										<span class="text">One Time Pull</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="astMute" id="astMute" ng-model="rss.AstMute">
+										<span class="text">AST Mute</span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="astSeek" id="astSeek" ng-model="rss.AstSeek">
+										<span class="text">AST Seek</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="broadvidvideos">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveRSS()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

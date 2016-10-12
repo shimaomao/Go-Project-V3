@@ -1,0 +1,75 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="BroadvidEmbedsEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidads" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="group.Name"></h4>
+                </div>
+                <div class="modal-body">
+        					<div class="form-group">
+        						<label for="name" class="control-label">Name</label>
+        						<input type="text" name="name" ng-model="embed.Label" class="form-control">
+        					</div>
+
+                  <div class="form-group">
+                  	<label for="type">Type</label>
+                  	<select name="type" id="type" class="form-control" ng-model="embed.Type">
+                  		<option value="1"  selected="selected">Desktop Ad</option>
+                  		<option value="2" >HTML5 Ad</option>
+                  		<option value="3" >Desktop Player</option>
+                  		<option value="4" >HTML5 Player</option>
+                  		<option value="5" >Default Ad Tag</option>
+                  		<option value="6" >Static Content</option>
+                  		<option value="7" >Override Script</option>
+                  	</select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="code">Code</label>
+                    <textarea name="code" ng-model="embed.Code" class="form-control"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="code">Code External</label>
+                    <textarea name="code" ng-model="embed.CodeExternal" class="form-control"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                  	<label for="customField1Label" class="control-label">Custom Field 1 Label</label>
+                  	<input type="text" ng-model="embed.CustomField1Label" id="customField1Label" class="form-control">
+                  </div>
+                  <div class="form-group">
+                  	<label for="customField1Label" class="control-label">Custom Field 2 Label</label>
+                  	<input type="text" ng-model="embed.CustomField2Label" id="customField2Label" class="form-control">
+                  </div>
+                  <div class="form-group">
+                  	<label for="customField1Label" class="control-label">Custom Field 3 Label</label>
+                  	<input type="text" ng-model="embed.CustomField3Label" id="customField3Label" class="form-control" >
+                  </div>
+                  <div class="form-group">
+                  	<label for="customField1Label" class="control-label">Custom Field 4 Label</label>
+                  	<input type="text" ng-model="embed.CustomField4Label" id="customField4Label" class="form-control" >
+                  </div>
+                  <div class="form-group">
+                  	<label for="customField1Label" class="control-label">Custom Field 5 Label</label>
+                  	<input type="text" ng-model="embed.CustomField5Label" id="customField5Label" class="form-control" >
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="admin.broadvidads">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveEmbed()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

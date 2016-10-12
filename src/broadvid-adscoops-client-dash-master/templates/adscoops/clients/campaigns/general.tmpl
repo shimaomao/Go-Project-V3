@@ -1,0 +1,275 @@
+{{ $out := . }}
+<div class="panel panel-default">
+	<div class="panel-heading">Add/Edit Campaign</div>
+	<div class="panel-body">
+			<input type="hidden" name="ID" value="{{ .AdscoopCampaign.ID }}">
+			<input type="hidden" name="client_id" value="{{ .AdscoopCampaign.ClientID }}">
+			<input type="hidden" name="enable_unload_tracking" value="{{ .AdscoopCampaign.EnableUnloadTracking }}">
+			{{ if eq .AdscoopCampaign.CampaignID 0 }}
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" class="form-control" value="{{ .AdscoopCampaign.Name }}">
+			</div>
+			{{ else }}
+			{{ if eq .UserPolicy.NameHidden true }}
+				<input type="hidden" name="name" id="name" value="{{ .AdscoopCampaign.Name }}">
+			{{ else }}
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" class="form-control" value="{{ .AdscoopCampaign.Name }}" {{ if eq .UserPolicy.NameReadOnly true }}readonly{{ end }}>
+			</div>
+			{{ end }}
+			{{ end }}
+			<div class="form-group">
+				<label for="CampaignGroupId">Campaign Group</label>
+				<select name="campaign_group_id" id="campaign_group_id" class="form-control">
+					<option value="0">Choose campaign group</option>
+					{{ range .AdscoopCampaignGroups }}
+					<option value="{{ .Id }}" {{if eq $out.AdscoopCampaign.CampaignGroupId .Id }}selected="selected"{{ end }}>{{ .Name }}</option>
+					{{ end }}
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="campaign_group_weight">Campaign Group Weight</label>
+				<input type="text" name="campaign_group_weight" id="campaign_group_weight" value="{{ .AdscoopCampaign.CampaignGroupWeight }}" class="form-control">
+			</div>
+
+			{{ if eq .UserPolicy.AppendRcHidden true }}
+				<input type="hidden" name="append_rc" value="{{ .AdscoopCampaign.AppendRc }}">
+			{{ else }}
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="append_rc" id="append_rc" value="1" {{ if eq .AdscoopCampaign.AppendRc true }}checked="checked"{{ end }}
+								{{ if eq .UserPolicy.AppendRcReadOnly true }} readonly {{ end }}> Append RC to url?
+						</label>
+					</div>
+				</div>
+			{{ end }}
+			{{ if eq .UserPolicy.SourceHidden true }}
+				<input type="hidden" name="source" id="source" class="form-control" value="{{ .AdscoopCampaign.Source }}">
+			{{ else }}
+			<div class="form-group">
+				<label for="source">Source</label>
+				<input type="text" name="source" id="source" class="form-control" value="{{ .AdscoopCampaign.Source }}" {{ if eq .UserPolicy.SourceReadOnly true }}readonly{{ end }}>
+			</div>
+			{{ end }}
+			{{ if eq .UserPolicy.DailyBudgetHidden true }}
+			<input type="hidden" name="daily_imps_limit" id="daily_imps_limit" class="form-control" value="{{ .AdscoopCampaign.DailyImpsLimit }}">
+			{{ else }}
+			<div class="form-group">
+				<label for="daily_imps_limit">Daily Budget</label>
+				<input type="text" name="daily_imps_limit" id="daily_imps_limit" class="form-control" value="{{ .AdscoopCampaign.DailyImpsLimit }}" {{ if eq .UserPolicy.DailyBudgetReadOnly true }}readonly{{ end }}>
+			</div>
+			{{ end }}
+			{{ if eq .UserPolicy.CPCHidden true }}
+			<input type="hidden" name="cpc" id="cpc" class="form-control" value="{{ .AdscoopCampaign.Cpc }}">
+			{{ else }}
+			<div class="form-group">
+				<label for="cpc">CPC</label>
+				<input type="text" name="cpc" id="cpc" class="form-control" value="{{ .AdscoopCampaign.Cpc }}" {{ if eq .UserPolicy.CPCReadOnly true }}readonly{{ end }}>
+			</div>
+			{{ end }}
+			{{ if eq .UserPolicy.WeightVarianceHidden true }}
+			<input type="hidden" name="weight_variance" id="weight_variance" class="form-control" value="{{ .AdscoopCampaign.WeightVariance }}">
+			{{ else }}
+			<div class="form-group">
+				<label for="weight_variance">Weight Variance</label>
+				<div class="input-group">
+					<input type="text" name="weight_variance" id="weight_variance" class="form-control" value="{{ .AdscoopCampaign.WeightVariance }}" style="text-align:right;" {{ if eq .UserPolicy.WeightVarianceReadOnly true }}readonly{{ end }}>
+					<div class="input-group-addon">%</div>
+				</div>
+				<p class="help-block">0% disables completely</p>
+			</div>
+			{{ end }}
+			<input type="hidden" name="tracking_method" value="{{ .AdscoopCampaign.TrackingMethod }}">
+			<!--
+			{{ if eq .UserPolicy.TrackingMethodHidden true }}
+			{{ else }}
+			<div class="form-group">
+				<label for="tracking_method">Tracking Method</label>
+				<select name="tracking_method" id="tracking_method" class="form-control" {{ if eq .UserPolicy.TrackingMethodReadOnly true }}disabled{{ end }}>
+					<option value="0" {{ if eq .AdscoopCampaign.TrackingMethod 0}}selected="SELECTED"{{ end }}>By Clicks</option>
+					<option value="1" {{ if eq .AdscoopCampaign.TrackingMethod 1}}selected="SELECTED"{{ end }}>By Verified</option>
+					<option value="2" {{ if eq .AdscoopCampaign.TrackingMethod 2 }}selected="SELECTED"{{ end }}>By Loads</option>
+				</select>
+
+				{{ if eq .UserPolicy.TrackingMethodReadOnly true }}
+					<input type="hidden" name="tracking_method" value="{{ .AdscoopCampaign.TrackingMethod }}">
+				{{ end }}
+			</div>
+			{{ end }}
+			-->
+			{{ if eq .UserPolicy.PausedHidden true }}
+				<input type="hidden" name="paused" value="{{ if eq .AdscoopCampaign.Paused true }}1{{ else }}0{{ end }}">
+			{{ else }}
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="paused" id="paused" value="1" {{ if eq .AdscoopCampaign.Paused true}}checked="checked"{{ end }} {{ if eq .UserPolicy.PausedReadOnly true }}disabled{{ end }}> Paused?
+					</label>
+				</div>
+			</div>
+			{{ if eq .UserPolicy.PausedReadOnly true }}
+			<input type="hidden" name="paused" value="{{ if eq .AdscoopCampaign.Paused true }}1{{ else }}0{{ end }}">
+			{{ end }}
+			{{ end }}
+			{{ if eq .UserPolicy.EnableMonCheckingHidden true }}
+				<input type="hidden" name="enable_campaign_quality_check" value="{{ if eq .AdscoopCampaign.EnableCampaignQualityCheck true }}1{{ else }}0{{ end }}">
+			{{ else }}
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="enable_campaign_quality_check" id="enable_campaign_quality_check" value="1" {{ if eq .AdscoopCampaign.EnableCampaignQualityCheck true}}checked="checked"{{ end }} {{ if eq .UserPolicy.EnableMonCheckingReadOnly true }}disabled{{ end }}> Enable mon checking?
+					</label>
+				</div>
+			</div>
+			{{ if eq .UserPolicy.EnableMonCheckingReadOnly true }}
+			<input type="hidden" name="enable_campaign_quality_check" value="{{ if eq .AdscoopCampaign.EnableCampaignQualityCheck true }}1{{ else }}0{{ end }}">
+			{{ end }}
+			{{ end }}
+		</div>
+		{{ if eq .UserPolicy.EnablePerformanceBasedPauseHidden true }}
+			<input type="hidden" name="performance_based_pause_enable" value="{{ if eq .AdscoopCampaign.PerformanceBasedPauseEnable true }}1{{else}}0{{ end }}">
+			<input type="hidden" name="performance_based_notify_only" value="{{ if eq .AdscoopCampaign.PerformanceBasedNotifyOnly true }}1{{else}}0{{ end }}">
+			<input type="hidden" name="performance_based_compare_a" value="{{ .AdscoopCampaign.PerformanceBasedCompareA }}">
+			<input type="hidden" name="performance_based_percent" value="{{ .AdscoopCampaign.PerformanceBasedPercent }}">
+			<input type="hidden" name="performance_based_compare_b" value="{{ .AdscoopCampaign.PerformanceBasedCompareB }}">
+		{{ else }}
+		<div class="panel-heading">Performance Based Metrics</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="performance_based_pause_enable" id="performance_based_pause_enable" {{ if eq .AdscoopCampaign.PerformanceBasedPauseEnable true }}checked="CHECKED"{{ end }} value="1" {{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}disabled{{ end }}> Enable Performance Based Paused?
+							</label>
+							{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+								<input type="hidden" name="performance_based_pause_enable" value="{{ if eq .AdscoopCampaign.PerformanceBasedPauseEnable true }}1{{else}}0{{ end }}">
+							{{ end }}
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="performance_based_notify_only" id="performance_based_notify_only" {{ if eq .AdscoopCampaign.PerformanceBasedNotifyOnly true }} checked="CHECKED"{{ end }} value="1"  {{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}disabled{{ end }}> Notify Only?
+							</label>
+							{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+								<input type="hidden" name="performance_based_notify_only" value="{{ if eq .AdscoopCampaign.PerformanceBasedNotifyOnly true }}1{{else}}0{{ end }}">
+							{{ end }}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="performance_based_compare_a">Performance Based Compare A</label>
+						<select name="performance_based_compare_a" id="performance_based_compare_a" class="form-control"  {{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}disabled{{ end }}>
+							<option value="0" {{ if eq .AdscoopCampaign.PerformanceBasedCompareA 0 }}selected="SELECTED"{{ end }}>Impressions</option>
+							<option value="1" {{ if eq .AdscoopCampaign.PerformanceBasedCompareA 1 }}selected="SELECTED"{{ end }}>Loads</option>
+							<option value="2" {{ if eq .AdscoopCampaign.PerformanceBasedCompareA 2 }}selected="SELECTED"{{ end }}>Verifications</option>
+						</select>
+						{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+							<input type="hidden" name="performance_based_compare_a" value="{{ .AdscoopCampaign.PerformanceBasedCompareA }}">
+						{{ end }}
+					</div>
+				</div>
+				<div class="col-md-2">
+					<p style="padding-top:25px; font-weight:800;">Less Than</p>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="performance_based_percent">Percent</label>
+						<input type="text" name="performance_based_percent" id="performance_based_percent" class="form-control" value="{{ .AdscoopCampaign.PerformanceBasedPercent }}" {{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}readonly{{ end }}>
+					</div>
+				</div>
+				<div class="col-md-1">
+					<p style="padding-top:25px; font-weight:800;">Of</p>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="performance_based_compare_b">Performance Based Compare A</label>
+						<select name="performance_based_compare_b" id="performance_based_compare_b" class="form-control"  {{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}disabled{{ end }}>
+							<option value="0" {{ if eq .AdscoopCampaign.PerformanceBasedCompareB 0 }}selected="SELECTED"{{ end }}>Impressions</option>
+							<option value="1" {{ if eq .AdscoopCampaign.PerformanceBasedCompareB 1 }}selected="SELECTED"{{ end }}>Loads</option>
+							<option value="2" {{ if eq .AdscoopCampaign.PerformanceBasedCompareB 2 }}selected="SELECTED"{{ end }}>Verifications</option>
+						</select>
+						{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+							<input type="hidden" name="performance_based_compare_b" value="{{ .AdscoopCampaign.PerformanceBasedCompareB }}">
+						{{ end }}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{ end }}
+		{{ if eq .UserPolicy.EnableStartStopTimesHidden true }}
+		<input type='hidden' value="{{ FormatReadableTime .AdscoopCampaign.StartDatetime }}" name="start_datetime_edit" >
+		<input type='hidden' value="{{ FormatReadableTime .AdscoopCampaign.EndDatetime }}" name="end_datetime_edit"/>
+		<input type="hidden" name="disable_start_time" value="{{ if eq .AdscoopCampaign.DisableStartTime true }}1{{else}}0{{ end }}">
+		<input type="hidden" name="disable_end_time" value="{{ if eq .AdscoopCampaign.DisableEndTime true }}1{{else}}0{{ end }}">
+		<input type="hidden" name="enable_start_stop_times" value="{{ if eq .AdscoopCampaign.EnableStartStopTimes true }}1{{else}}0{{ end }}">
+		{{ else }}
+		<div class="panel-heading">Flight Information</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="start_datetime"> Start Date &amp; Time (All Times in America/Los_Angeles timezone)</label>
+						<div class='input-group date' id='start_datetime_edit'>
+						    <input type='text' class="form-control" value="{{ FormatReadableTime .AdscoopCampaign.StartDatetime }}" name="start_datetime_edit" {{ if eq .UserPolicy.EnableStartStopTimesReadOnly true }}readonly{{ end }}>
+						    <span class="input-group-addon">
+						        <span class="glyphicon glyphicon-calendar"></span>
+						    </span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="disable_start_time" id="disable_start_time" value="1" {{ if eq .AdscoopCampaign.DisableStartTime true }}checked="CHECKED"{{ end }}  {{ if eq .UserPolicy.EnableStartStopTimesReadOnly true }}disabled{{ end }}> Disable Only Start Time
+						{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+						<input type="hidden" name="disable_start_time" value="{{ if eq .AdscoopCampaign.DisableStartTime true }}1{{else}}0{{ end }}">
+						{{ end }}
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="start_datetime"> End Date &amp; Time (All Times in America/Los_Angeles timezone)</label>
+						<div class='input-group date' id='end_datetime_edit'>
+						    <input type='text' class="form-control" value="{{ FormatReadableTime .AdscoopCampaign.EndDatetime }}" name="end_datetime_edit" {{ if eq .UserPolicy.EnableStartStopTimesReadOnly true }}readonly{{ end }}/>
+						    <span class="input-group-addon">
+						        <span class="glyphicon glyphicon-calendar"></span>
+						    </span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="disable_end_time" id="disable_end_time" value="1" {{ if eq .AdscoopCampaign.DisableEndTime true }}checked="CHECKED"{{ end }}  {{ if eq .UserPolicy.EnableStartStopTimesReadOnly true }}disabled{{ end }}> Disable Only End Time
+						{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+						<input type="hidden" name="disable_end_time" value="{{ if eq .AdscoopCampaign.DisableEndTime true }}1{{else}}0{{ end }}">
+						{{ end }}
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<div class="checkbox">
+							<label for="enable_start_stop_times">
+								<input type="checkbox" name="enable_start_stop_times" id="enable_start_stop_times" {{ if eq .AdscoopCampaign.EnableStartStopTimes true}}checked="checked"{{ end }} value="1"  {{ if eq .UserPolicy.EnableStartStopTimesReadOnly true }}disabled{{ end }}>Enable Start/Stop Times?</label>
+						{{ if eq .UserPolicy.EnablePerformanceBasedPauseReadOnly true }}
+						<input type="hidden" name="enable_start_stop_times" value="{{ if eq .AdscoopCampaign.EnableStartStopTimes true }}1{{else}}0{{ end }}">
+						{{ end }}
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	{{ end }}
+</div>

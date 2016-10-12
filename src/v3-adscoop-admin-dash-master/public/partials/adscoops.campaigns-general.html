@@ -1,0 +1,288 @@
+<div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                    <input type="text" class="form-control" ng-model="campaign.Name" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Source</label>
+                                    <input type="text" class="form-control" ng-model="campaign.Source">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Daily Budget</label>
+                                    <input type="text" class="form-control" ng-model="campaign.DailyImpsLimit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">CPC</label>
+                                    <input type="text" class="form-control" ng-model="campaign.Cpc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Weight Variance</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="campaign.WeightVariance">
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="trackingMethod">Tracking Method</label>
+                                <select name="trackingMethod" id="trackingMethod" ng-model="campaign.TrackingMethod" class="form-control">
+                                    <option value="0">Clicks</option>
+                                    <option value="1">Verified</option>
+                                    <option value="2">Load</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="campaign.EnableUnloadTracking">
+                                        <span class="text">Enable Unload Tracking?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="campaign.Paused">
+                                        <span class="text">Paused?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="campaign.EnableCampaignQualityCheck">
+                                        <span class="text">Enable Mon Checking?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="campaign.Inactive">
+                                        <span class="text">Inactive (hidden from view)?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <div class="widget-caption">Performance Based Metrics</div>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="campaign.PerformanceBasedPauseEnable">
+                                                        <span class="text">Enable Performance Based Pause?</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="campaign.PerformanceBasedNotifyOnly">
+                                                        <span class="text">Notify Only?</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label>Performance Based Compare A</label>
+                                                                <select ng-model="campaign.PerformanceBasedCompareA" class="form-control">
+                                                                    <option value="0">Impressions</option>
+                                                                    <option value="1">Loads</option>
+                                                                    <option value="2">Verifications</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <label>Less Than</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label>Percent Of</label>
+                                                                <input type="number" ng-model="campaign.PerformanceBasedPercent" class="form-control">
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <label>Of</label>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <label>Performance Based Compare B</label>
+                                                                <select ng-model="campaign.PerformanceBasedCompareB" class="form-control">
+                                                                    <option value="0">Impressions</option>
+                                                                    <option value="1">Loads</option>
+                                                                    <option value="2">Verifications</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <div class="widget-caption">Flight Information</div>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="start_datetime_edit">Start Date & Time (All Times in America/Los_Angeles timezone)</label>
+                                                <input type="datetime-local" ng-model="campaign.StartDatetime" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="end_datetime_edit">End Date & Time (All Times in America/Los_Angeles timezone)</label>
+                                                <input type="datetime-local" ng-model="campaign.EndDatetime" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="campaign.DisableStartTime">
+                                                        <span class="text">Disable Only Start Time</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="campaign.EnableStartStopTimes">
+                                                        <span class="text">Enable Flighting?</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" ng-model="campaign.DisableEndTime">
+                                                        <span class="text">Disable Only End Time</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <div class="widget-caption">URL's</div>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                        <textarea class="form-control" ng-model="uNew" placeholder="Enter one URL per line to add or re-enable"></textarea>
+                                        <div class="input-group-btn">
+                                            <span class="btn btn-primary" ng-click="addUrl()">Add</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th width="90%">Active URL</th>
+                            <th width="10%">Weight</th>
+                            <th width="5%" style="width:10px;">Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in campaign.urls">
+                            <td>
+                                <span ng-bind="u.Url"></span>
+                                <input type="hidden" name="url[]" ng-value="u.Url">
+                            </td>
+                            <td>
+                                <input type="number" name="weight[]" ng-model="u.Weight" class="form-control">
+                            </td>
+                            <td colspan="1">
+                                <span class="btn btn-xs btn-danger" ng-click="removeUrl($index)">Remove</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Paused URL</th>
+                            <th style="width:10px;">Reactivate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in campaign.all_urls">
+                            <td>
+                                <span ng-bind="u.Url"></span>
+                            </td>
+                            <td colspan="1">
+                                <span class="btn btn-xs btn-success" ng-click="reactivateUrl($index)">Reactivate URL</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>

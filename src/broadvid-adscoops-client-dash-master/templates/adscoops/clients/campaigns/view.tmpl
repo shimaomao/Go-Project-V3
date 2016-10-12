@@ -1,0 +1,90 @@
+{{ $out := .}}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="nav nav-tabs">
+			<li>
+				<a href="/clients/{{ .AdscoopClient.ID }}/edit">Edit</a>
+			</li>
+			<li class="active">
+				<a href="/clients/{{ .AdscoopClient.ID }}/campaigns/view">View Campaigns</a>
+			</li>
+			<li>
+				<a href="/clients/{{ .AdscoopClient.ID }}/users/list">View Users</a>
+			</li>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">Clients
+		<div class="btn-group pull-right">
+			<div class="dropdown pull-right">
+				<a href="#" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">New Campaign <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="/clients/{{ .AdscoopClient.ID }}/campaigns/new">New Links Campaign</a>
+						</li>
+						<li>
+							<a href="/clients/{{ .AdscoopClient.ID }}/campaigns/newXml">New XML Real-Time Campaign</a>
+						</li>
+						<li>
+							<a href="/clients/{{ .AdscoopClient.ID }}/campaigns/newXmlIngest">New XML Ingest Campaign</a>
+						</li>
+					</ul>
+			</div>
+			<div class="dropdown pull-right">
+				<a href="#" class="btn btn-xs btn-default" data-toggle="dropdown">Bulk Options <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="/clients/{{ .AdscoopClient.ID }}/allEnableMon">Enable Mon across all campaigns</a>
+					</li>
+					<li>
+						<a href="/clients/{{ .AdscoopClient.ID }}/allDisableMon">Disable Mon across all campaigns</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="/clients/{{ .AdscoopClient.ID }}/allDisablePerformanceBasedPause">Disable Performance Based Pausing</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<table class="table table-condensed table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Type</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{ range .AdscoopCampaigns }}
+			<tr>
+				<td>{{ .Name }}</td>
+				<td>
+					{{ if eq .Type 0 }}
+					Links
+					{{ end }}
+					{{ if eq .Type 1 }}
+					XML Real-Time
+					{{ end }}
+					{{ if eq .Type 2 }}
+					XML Ingest
+					{{ end }}
+				</td>
+				<td>
+					<div class="btn-group pull-right">
+						<a href="/clients/{{ .ClientID }}/campaigns/{{ .ID }}/edit" class="btn btn-info btn-xs">Edit</a>
+						<a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/clients/{{ .ClientID }}/campaigns/{{ .ID }}/copy">Copy</a></li>
+							<li><a href="/clients/{{ .ClientID }}/campaigns/{{ .ID }}/pause">Pause</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			{{ end}}
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,125 @@
+{{ $out := . }}
+<tr style="background-color:black; color:white;">
+	<td style="text-align:center; " colspan="{{ if eq $out.UserPolicy.AddCopyCampaignEnabled true }}5{{ else }}4{{ end }}">Last Updated: {{ FormatReadableTime .Campaigns.LastUpdated }}</td>
+</tr>
+
+{{ range .Campaigns.ActiveCampaigns }}
+<tr class="{{ .Class }}">
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule" class="btn btn-xs btn-primary pull-left btn-block">Edit</a>
+	</td>
+	<td>{{ .Name }}</td>
+	<td>{{ .CampaignGroupWeight }}</td>
+
+	<td style="text-align:right;">
+		{{ if eq .TrackingMethod 0}}
+		{{ if eq .Impressions "" }}
+		0
+		{{ else }}
+		{{ .Impressions }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 1}}
+
+		{{ if eq .Engagements "" }}
+		0
+		{{ else }}
+		{{ .Engagements }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 2}}
+
+		{{ if eq .Loads "" }}
+		0
+		{{ else }}
+		{{ .Loads }}
+		{{ end }}
+		{{ end }}
+	</td>
+	{{ if eq $out.UserPolicy.AddCopyCampaignEnabled true }}
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule?copy=true" class="btn btn-xs btn-link pull-right btn-block">Copy</a>
+	</td>
+	{{ end }}
+</tr>
+{{ end }}
+
+{{ range .Campaigns.InactiveCampaigns }}
+<tr class="{{ .Class }}">
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule" class="btn btn-xs btn-primary pull-left btn-block">Edit</a>
+	</td>
+	<td>{{ .Name }}</td>
+<td>{{ .CampaignGroupWeight }}</td>
+	<td style="text-align:right;">
+		{{ if eq .TrackingMethod 0}}
+		{{ if eq .Impressions "" }}
+		0
+		{{ else }}
+		{{ .Impressions }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 1}}
+
+		{{ if eq .Engagements "" }}
+		0
+		{{ else }}
+		{{ .Engagements }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 2}}
+
+		{{ if eq .Loads "" }}
+		0
+		{{ else }}
+		{{ .Loads }}
+		{{ end }}
+		{{ end }}
+	</td>
+	{{ if eq $out.UserPolicy.AddCopyCampaignEnabled true }}
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule?copy=true" class="btn btn-xs btn-link pull-right btn-block">Copy</a>
+	</td>
+	{{ end }}
+</tr>
+{{ end }}
+
+{{ range .Campaigns.PausedCampaigns }}
+<tr class="{{ .Class }}">
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule" class="btn btn-xs btn-primary pull-left btn-block">Edit</a>
+	</td>
+	<td>{{ .Name }}</td>
+
+	<td style="text-align:right;">
+		{{ if eq .TrackingMethod 0}}
+		{{ if eq .Impressions "" }}
+		0
+		{{ else }}
+		{{ .Impressions }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 1}}
+
+		{{ if eq .Engagements "" }}
+		0
+		{{ else }}
+		{{ .Engagements }}
+		{{ end }}
+		{{ end }}
+		{{ if eq .TrackingMethod 2}}
+
+		{{ if eq .Loads "" }}
+		0
+		{{ else }}
+		{{ .Loads }}
+		{{ end }}
+		{{ end }}
+	</td>
+	{{ if eq $out.UserPolicy.AddCopyCampaignEnabled true }}
+	<td style="width:5%">
+		<a href="/campaigns/{{ .ID }}/new-schedule?copy=true" class="btn btn-xs btn-link pull-right btn-block">Copy</a>
+	</td>
+	{{ end }}
+</tr>
+{{ end }}

@@ -1,0 +1,49 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="SettingsUsersEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="user.Name"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <p>Only the e-mail is required, everything else will be populated by Google on first login</p>
+                        <div class="form-group">
+                          <label for="name">Name</label>
+                          <input type="text" ng-model="user.Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" ng-model="user.Email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Avatar URL</label>
+                          <input type="url" ng-model="user.AvatarURL" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" checked="checked" ng-model="user.LoginAllowed">
+                                        <span class="text">Login Allowed?</span>
+                                    </label>
+                                </div>
+                        </div>
+                      </div>
+                </div>
+            </div><!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" ui-sref="admin.settings">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="saveUser()">Save</button>
+            </div>
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,48 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+<script>
+	String.prototype.isEmpty = function() {
+	    return (this.length === 0 || !this.trim());
+	};
+	var adscoopsCampaign = angular.module('adscoopsCampaign',[]);
+
+	adscoopsCampaign.controller('Main', function($scope) {
+		$scope.campaign = {{ .AdscoopCampaign }}
+
+		$scope.uNew = "";
+
+		$scope.removeUrl = function(idx) {
+			var url_to_delete = $scope.campaign.urls[idx];
+
+			  $scope.campaign.urls.splice(idx, 1);
+		}
+
+		$scope.reactivateUrl = function(idx) {
+			  
+			  if ($scope.campaign.urls === null) {
+			  	console.log('adding to blank urls');
+			  	$scope.campaign.urls = []
+			  }
+			  	$scope.campaign.urls.unshift($scope.campaign.all_urls[idx]);
+			  $scope.campaign.all_urls.splice(idx, 1);
+		}
+
+		$scope.addUrl = function() {
+			urls = $scope.uNew.split('\n');
+			$scope.uNew = "";
+			for(i = 0; i < urls.length; i++) {
+				if (urls[i].isEmpty()) {
+					console.log(urls[i].isEmpty(), "is empty");
+					continue;
+				}
+				if ($scope.campaign.urls === null) {
+					$scope.campaign.urls = [{Url: urls[i], Weight: 1}];
+				} else {
+					$scope.campaign.urls.unshift({Url: urls[i], Weight: 1});
+				}
+			}
+		}
+
+		$('#start_datetime_edit').datetimepicker();
+		$('#end_datetime_edit').datetimepicker();
+	})
+</script>

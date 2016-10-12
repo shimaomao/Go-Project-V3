@@ -1,0 +1,38 @@
+<div ng-controller="AdscoopCampaignGroupsViewall" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View Campaigns</h4>
+                </div>
+                <div class="modal-body">
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>ID</th>
+                				<th>Name</th>
+                                <th>&nbsp;</th>
+                			</tr>
+                		</thead>
+                		<tbody>
+                			<tr ng-repeat="campaign in ::campaignGroups">
+                			    <td ng-bind="campaign.ID"></td>
+                			    <td ng-bind="campaign.Name"></td>
+                			    <td>
+                			    	<a ui-sref="admin.adscoops.campaign-groups-edit({campaigngroupid: campaign.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" ui-sref="admin.adscoops.campaign-groups-new">New Campaign Group</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div ui-view></div>

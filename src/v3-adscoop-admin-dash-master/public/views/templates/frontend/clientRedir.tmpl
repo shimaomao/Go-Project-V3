@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+	{{ if eq .AdscoopRedirect.RedirType 5 }}
+	<meta http-equiv="refresh" content="0; url={{ .Url }}" />
+	{{ end }}
+</head>
+<body>
+	{{ if eq .AdscoopRedirect.BustIframe true }}
+		<script type="text/javascript">
+		if (top.location!= self.location) {
+		   top.location = self.location.href;
+		}
+		</script>
+	{{ end }}
+	{{ if ne .AdscoopRedirect.BbsiPath "" }}
+
+	<!-- START TAG: CLIENT: adscoops; PATH: redir1 -->
+	<script type="text/javascript">
+	var _bbsibaR = []; _bbsibaR[0] = "{{ .AdscoopRedirect.BbsiPath }}";
+	</script>
+	<script type="text/javascript" src="//a.bbsi.io/e4faecc5a7cf7a3d2e2db72292bed08f/a.js"></script>
+	<script>
+	bbsiBA.dingDong("client_side_redir_attempt");
+	</script>
+	<!-- END TAG -->
+
+	<script>
+	setTimeout(function() {
+		bbsiBA.dingDong("client_side_no_redir")
+	}, 5000);
+	</script>
+
+	{{ end }}
+
+	<script language=javascript>
+
+	//Variable for random number.
+	var i; 
+	//Array for links.
+	var arLinks = new Array();
+
+	arLinks[0] = "{{ .Url }}";
+
+
+	//Create random number, based on number of elements in array.
+	i = Math.floor( Math.random() * arLinks.length );
+
+	//Redirect
+	{{ if eq .AdscoopRedirect.RedirType 1 }}
+	window.location = arLinks[i];
+	{{ end }}
+	{{ if eq .AdscoopRedirect.RedirType 2 }}
+	window.location.href = arLinks[i];
+	{{ end }}
+	{{ if eq .AdscoopRedirect.RedirType 3 }}
+	window.location.assign(arLinks[i]);
+	{{ end }}
+	{{ if eq .AdscoopRedirect.RedirType 4 }}
+	window.location.replace(arLinks[i]);
+	{{ end }}
+
+	</script>
+</body>
+</html>

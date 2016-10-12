@@ -1,0 +1,56 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div ng-controller="BroadvidVideosRedirectsEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.broadvidvideos" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="redirect.Key"></h4>
+                </div>
+                <div class="modal-body">
+					<div class="form-group">
+						<label for="label">Key</label>
+						<input type="text" name="name" id="name" ng-model="redirect.Key" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label for="rssID">RSS</label>
+						<select name="rssID" id="rssID" ng-model="redirect.RssID" class="form-control" ng-options="r.ID as r.Label for r in rss"></select>
+						</select>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="stripParams" id="stripParams" ng-model="redirect.StripParams">
+									<span class="text">Strip Params</span>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="useClientRedirect" id="useClientRedirect" ng-model="redirect.ClientRedirect">
+									<span class="text">Use Client-Side Redirect</span>
+								</label>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" ui-sref="admin.broadvidvideos">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveRedirect()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

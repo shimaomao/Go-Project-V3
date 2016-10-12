@@ -1,0 +1,469 @@
+<div ng-controller="AdscoopsDashboardCtrl">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="databox bg-white radius-bordered">
+            <div class="databox-left bg-themesecondary">
+              <div class="databox-piechart">
+                <div class="easyPieChart block-center" id="impressionsPieChart"><span class="white font-90">
+                                <span ng-bind="impressionsBilledPercent"></span>%
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="databox-right">
+              <span class="databox-number themesecondary" ng-bind="topStats.Impressions | number"></span>
+              <span class="databox-text darkgrey">Impressions Billed</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="databox bg-white radius-bordered">
+            <div class="databox-left bg-themethirdcolor">
+              <div class="databox-piechart">
+                <div class="easyPieChart block-center" id="impressionsRequiredPieChart"><span class="white font-90">
+                                <span ng-bind="impressionsRequiredPercent"></span>%
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="databox-right">
+              <span class="databox-number themethirdcolor" ng-bind=" topStats.Limit | number "></span>
+              <span class="databox-text darkgrey">Impressions Required</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="databox bg-white radius-bordered">
+            <div class="databox-right">
+              <span class="databox-number themeprimary">$<span  ng-bind=" topStats.Revenue | number " decimal="2"></span></span>
+              <span class="databox-text darkgrey">Revenue</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div class="databox bg-white radius-bordered">
+            <div class="databox-right">
+              <span class="databox-number palegreen">$<span ng-bind=" topStats.eCPM | number " decimal="2"></span></span>
+              <span class="databox-text darkgrey">eCPM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="dashboard-box">
+            <div class="box-header">
+              <div class="deadline">
+                Remaining Days: <span ng-bind="daysLeft"></span>
+              </div>
+            </div>
+            <div class="box-progress">
+              <div class="progress-handle" style="left: calc({{ (dayOfMonth / max) * 100 }}% - 35px)">day <span ng-bind="dayOfMonth"></span></div>
+              <progressbar class="progress-xs progress-no-radius bg-whitesmoke" value="dayOfMonth" max="max"></progressbar>
+            </div>
+            <div class="box-tabbs">
+              <tabset flat="true" justified="true">
+                <tab heading="Redirect Impressions">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <canvas id="line_redir" class="chart chart-line chart-xl" chart-data="realTimeRedir" chart-series="series" chart-labels="realtimeRedirLabels" chart-options="options" chart-colours="options.colors"></canvas>
+                    </div>
+                  </div>
+                </tab>
+                <tab heading="Revenue">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <canvas id="line_rev" class="chart chart-line" chart-data="realTimeRev" chart-series="series" chart-labels="realtimeRedirLabels" chart-options="options" chart-colours="options.colors"></canvas>
+                    </div>
+                  </div>
+                </tab>
+                <tab heading="Client Breakdown">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div id="clientRevenuePlot" class="chart chart-lg no-margin"></div>
+                    </div>
+                </tab>
+              </tabset>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <div class="orders-container">
+        <div class="orders-header">
+          <h6>Latest Updates</h6>
+        </div>
+        <ul class="orders-list">
+          <li class="order-item" ng-repeat="message in messages">
+            <div class="row">
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 item-left">
+                <div class="item-booker">{{ message.title }}</div>
+                <div class="item-time">
+                  <span>{{ message.message }}</span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+        <div class="databox-top bg-palegreen no-padding">
+
+          <div class="horizontal-space space-lg"></div>
+          <div class="databox-sparkline no-margin">
+            <span id="clicksDataGraph"></span>
+          </div>
+        </div>
+        <div class="databox-bottom no-padding">
+          <div class="databox-row">
+            <div class="databox-cell cell-6 text-align-left">
+              <span class="databox-text">Clicks</span>
+              <span class="databox-number"><span ng-bind="statsVerticals.Clicks.Impressions | number" ></span></span>
+            </div>
+            <div class="databox-cell cell-6 text-align-right">
+              <span class="databox-text">Revenue</span>
+              <span class="databox-number font-70">$<span ng-bind="statsVerticals.Clicks.Revenue | number"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+        <div class="databox-top bg-orange no-padding">
+
+          <div class="horizontal-space space-lg"></div>
+          <div class="databox-sparkline no-margin">
+            <span id="verificationsDataGraph"></span>
+          </div>
+        </div>
+        <div class="databox-bottom no-padding">
+          <div class="databox-row">
+            <div class="databox-cell cell-6 text-align-left">
+              <span class="databox-text">Verified</span>
+              <span class="databox-number"><span ng-bind="statsVerticals.Verification.Impressions | number"></span></span>
+            </div>
+            <div class="databox-cell cell-6 text-align-right">
+              <span class="databox-text">Revenue</span>
+              <span class="databox-number font-70">$<span  ng-bind="statsVerticals.Verification.Revenue | number" ></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col=lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="databox databox-lg databox-inverted radius-bordered databox-shadowed databox-graded databox-vertical">
+        <div class="databox-top bg-azure no-padding">
+
+          <div class="horizontal-space space-lg"></div>
+          <div class="databox-sparkline no-margin">
+            <span id="loadsDataGraph"></span>
+          </div>
+        </div>
+        <div class="databox-bottom no-padding">
+          <div class="databox-row">
+            <div class="databox-cell cell-6 text-align-left">
+              <span class="databox-text">Loads</span>
+              <span class="databox-number"><span ng-bind="statsVerticals.Load.Impressions | number" ></span></span>
+            </div>
+            <div class="databox-cell cell-6 text-align-right">
+              <span class="databox-text">Revenue</span>
+              <span class="databox-number font-70">$<span ng-bind="statsVerticals.Load.Revenue | number"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="widget">
+        <div class="widget-header bordered-bottom bordered-themesecondary">
+          <i class="widget-icon fa fa-tags themesecondary"></i>
+          <span class="widget-caption themesecondary">Clients</span>
+        </div>
+        <!--Widget Header-->
+        <div class="widget-body  no-padding">
+          <div class="tickets-container">
+            <ul class="tickets-list">
+              <li class="ticket-item" ng-repeat="c in clients | orderBy: 'UserSettings.ClientOrder'">
+                <div class="row" style="position:relative;">
+                                      <div class="progress progress-striped" style="height:50px; width:100%; display:block; top:0; left:0; position:absolute; z-index:0;">
+                  <span style="width:{{ (c.ReceivedImps / c.RequiredImps) * 100 }}%;" class="progress-bar"
+
+
+                          ng-class="{ 'progress-bar-danger': ((c.ReceivedImps / c.RequiredImps) <= .2),
+                                      'progress-bar-warning': ((c.ReceivedImps / c.RequiredImps) > .2 && (c.ReceivedImps / c.RequiredImps) < .6),
+                                    'progress-bar-success': ((c.ReceivedImps / c.RequiredImps) > 1)}"
+                                    ></span>
+                                    </div>
+                  <div class="ticket-user col-lg-3 col-sm-12">
+                    <span style="font-weight:800; cursor:pointer;float:left; padding-left:20px;" ng-click="clientInfo(c)" ng-bind="c.Name"></span>
+                    <div style="width:100%; clear:both; height:0;"></div>
+                    <span style="font-weight:800; float:left; padding-left:20px;">{{ (c.ReceivedImps / c.RequiredImps) * 100 | number:0 }}% complete</span>
+                  </div>
+                  <div class="ticket-user col-lg-5 col-sm-12">
+
+                    <div style="float:left; padding:5px; background-color:#eee; margin-right:10px; border-radius: 6px;" id="impressionsDataByClientCont{{ c.ID }}">
+                      <div class="databox-sparkline no-margin" style="float:left;">
+                        <span id="impressionsDataByClient{{ c.ID }}"></span>
+                      </div>
+                    </div>
+
+                    <div style="float:left; padding:5px; background-color:#eee; margin-right:10px; border-radius: 6px;" id="engagementsDataByClientCont{{ c.ID }}">
+                      <div class="databox-sparkline no-margin" style="float:left;">
+                        <span id="engagementsDataByClient{{ c.ID }}"></span>
+                      </div>
+                    </div>
+
+                    <div style="float:left; padding:5px; background-color:#eee; margin-right:10px; border-radius: 6px;" id="loadsDataByClientCont{{ c.ID }}">
+                      <div class="databox-sparkline no-margin" style="float:left;">
+                        <span id="loadsDataByClient{{ c.ID }}"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ticket-user col-lg-4 col-sm-12">
+                    <table class="table table-condensed" style="margin-top: -12px; background:none !important; width:100%;">
+                      <thead>
+                        <tr>
+                          <th style="width:25%;">Goal</th>
+                          <th style="width:25%;">Remaining</th>
+                          <th style="width:25%;">Today Spend</th>
+                          <th style="width:15%;">TOS</th>
+                          <td style="width:10%;">&nbsp;</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{ c.RequiredImps | number:0 }}</td>
+                          <td>{{ c.RequiredImps - c.ReceivedImps | number:0 }}</td>
+                          <td>${{ c.TodaySpend | number:2 }} </td>
+                          <td>{{ c.TOSAvg | number }}</td>
+                          <td>
+                            <div class="btn-group" style="margin-top: -31px;width: 60px;">
+                              <a ui-sref="admin.adscoops.clients-edit({id: c.ID })" class="btn btn-xs btn-info" title="Edit Client">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                              </a>
+                              <a ui-sref="admin.adscoops.clients-edit.viewcampaigns({id: c.ID })" class="btn btn-xs btn-info" title="View Associated Campaigns">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div ng-show="c.UserSettings.ShowInfo == true">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <canvas id="line_client_redir_{{ c.ID }}" class="chart chart-line chart-xl" chart-data="clientRedirData['client_redir_data_' + c.ID]" chart-series="clientRedirData['client_redir_labels_' + c.ID]"
+                        chart-legend="true"
+                       chart-labels='["","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]'  chart-options="options" chart-click="loadRedirSideview"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group" style="padding-top:10px;">
+                        <select name="redirChooser" ng-change="redirectQuickEdit(clientRedirData['client_redir_chosen' + c.ID].ID, c.ID)" ng-model="clientRedirData['client_redir_chosen' + c.ID]" ng-options="r.Name for r in clientRedirData['client_redir_list_' + c.ID]" class="form-control">
+                          <option value="">Choose a redirect to edit</option>
+                        </select>
+                      </div>
+                      <div class="well well-sm" ng-show="clientRedirData['client_redir_editdata_' + c.ID].ID > 0">
+                        <div >
+                        <form ng-submit="saveRedirectQuickview(clientRedirData['client_redir_editdata_' + c.ID])">
+                          <div class="form-group">
+                            <label for="name">Editing <strong>{{ clientRedirData['client_redir_editdata_' + c.ID].Name }}</strong></label>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="threshold">Advertising Campaign Threshold %</label>
+                            <input type="number" value="90" class="form-control" ng-model="clientRedirData['client_redir_editdata_' + c.ID].CampaignThresholdPercent">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="threshold">Advertising Daily Spend</label>
+                            <input type="text" value="2300" class="form-control" ng-model="clientRedirData['client_redir_editdata_' + c.ID].AdvertisingDailySpend">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="threshold">Advertising CPC</label>
+                            <input type="text" value="0.0040" class="form-control" ng-model="clientRedirData['client_redir_editdata_' + c.ID].AdvertisingBid">
+                          </div>
+
+                          <div class="form-group">
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="1" ng-model="clientRedirData['client_redir_editdata_' + c.ID].EnableAdvertisingPause">
+                                <span class="text">Enable Advertising Pause?</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="1" ng-model="clientRedirData['client_redir_editdata_' + c.ID].EnableAdvertisingSpendChange">
+                                <span class="text">Enable Advertising Spend Change?</span>
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" value="1" ng-model="clientRedirData['client_redir_editdata_' + c.ID].EnableAdvertisingASAPSpending">
+                                <span class="text">Enable Advertising ASAP Spend?</span>
+                              </label>
+                            </div>
+                          </div>
+
+                            <input type="submit" value="Save Redirect" class="btn btn-primary pull-left">
+                            <a ui-sref="admin.adscoops.redirects-edit({id: clientRedirData['client_redir_editdata_' + c.ID].ID })" class="btn btn-info pull-right" ng-click="clearRedirEditScreen(c)">Full Edit</a>
+                            <div class="clearfix"></div>
+                        </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top:10px;">
+                    <div class="col-lg-12 col-sm-12">
+                        <form ng-submit="showReport(c)" class="form-inline">
+                            <div class="form-group">
+                              <label for="" style='padding-right:10px;'>
+                                <strong>Charge Amount: </strong> ${{ c.ChargeAmount | number:2 }}
+                              </label>
+                            </div>
+                            <div class="form-group">
+                              <label for="" style='padding-right:10px;'>
+                                <strong>Balance: </strong> ${{ c.TotalSpent | number:2 }}
+                              </label>
+                            </div>
+                            <div class="form-group">
+                              <label for="" style='padding-right:10px;'><strong>Reports: </strong></label>
+                            </div>
+                            <div class="form-group">
+                              <label for="" style='padding-right:10px;'>Start Time</label>
+                              <input type="date" name="start_time" id="start_time" ng-model="c.ReportStartDate" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="" style='padding-right:10px; padding-left:10px;'>End Time</label>
+                              <input type="date" name="end_time" id="end_time" ng-model="c.ReportEndDate" class="form-control">
+                            </div>
+                            <span class="form-group">
+                              <input type="submit" value="View" class="btn btn-primary" ng-show="c.showReport !== true">
+                              <span ng-click="c.showReport = false" class="btn btn-primary" ng-show="c.showReport">Hide</span>
+                              <a ng-click="downloadReport(c)" class="btn btn-info">Download CSV</a>
+                              <a ng-click="setReportToToday(c)" class="btn btn-info">Today</a>
+                              <a ng-click="setReportToYesterday(c)" class="btn btn-info">Yesterday</a>
+                              <a ng-click="setReportToMTD(c)" class="btn btn-info">MTD</a>
+                            </span>
+                          <p>
+<textarea ng-show="c.showReport" ng-bind="c.reportOutput"  rows="20" style="white-space: pre;
+  word-wrap: normal;width:100%; max-height:400px; overflow:auto;font-family: monospace;"></textarea>
+                          </p>
+                        </form>
+                    </div>
+                  </div>
+                  <div class="row bg-ivory text-center" ng-show="c.Campaigns.length == 0">
+                    <p>Loading Campaigns...</p>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <form ng-submit="saveUserOptions(c)" class="form-inline">
+                        <div class="form-group">
+                          <label for="" style='padding-right:10px;'>
+                            <strong>Viewing Options</strong>
+                          </label>
+                        </div>
+                        <div class="form-group">
+                          <label for="CampaignSort" style="padding-right:10px">Campaign Sort</label>
+                          <select name="CampaignSort" id="CampaignSort" ng-model="c.UserSettings.CampaignSort" class="form-control">
+                            <option value="Paused">By Paused</option>
+                            <option value="Stats.DailyImps / DailyImpsLimit">Campaigns Furthest To Completion</option>
+                            <option value="(DailyImpsLimit / Stats.DailyImps)">Campaigns Nearest From Completion</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="ClientOrder" style="padding-right:10px; padding-left:10px;">
+                            Client Order
+                          </label>
+                          <input type="number" class="form-control" ng-model="c.UserSettings.ClientOrder" min="0" max="99999999999">
+                        </div>
+                        <div class="form-group">
+                          <input type="submit" value="Update" class="btn btn-primary">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <hr>
+                  </div>
+                  <div class="row" ng-repeat="cpn in c.Campaigns | orderBy: c.UserSettings.CampaignSort">
+                    <div class="ticket-user col-lg-2 col-sm-6">
+                      <span class="user-name">
+                          <a ui-sref="admin.adscoops.clients-edit.viewcampaigns.edit({id: c.ID, campaignid: cpn.ID})" ng-bind="cpn.Name"></a>
+                      </span>
+                    </div>
+                    <div class="col-lg-1">
+                      ${{ cpn.Stats.DailyRevenue | number:2 }}
+                    </div>
+                    <div class="ticket-time col-lg-1 col-sm-1 col-xs-6">
+                      <div class="widget-buttons buttons-bordered">
+                        <label>
+                          <input class="checkbox-slider toggle colored-blue" type="checkbox" ng-model="c.editCampaigns[cpn.ID].Paused" ng-true-value="false" ng-false-value="true" ng-click="showInfo(c, c.editCampaigns[cpn.ID]);">
+                          <span class="text"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="ticket-time col-lg-3 col-sm-3 col-xs-6">
+                      <div class="input-group input-group-xs">
+                        <input type="text" class="form-control input-xs" ng-model="c.editCampaigns[cpn.ID].DailyImpsLimit" ng-blur="showInfo(c, c.editCampaigns[cpn.ID]);">
+                        <span class="input-group-addon bg-palegreen bordered-palegreen">imps</span>
+
+                        <input type="text" class="form-control input-xs" ng-model="c.editCampaigns[cpn.ID].Cpc" ng-blur="showInfo(c, c.editCampaigns[cpn.ID]);" id="cpnCpc{{ cpn.ID }}" style="margin-left:4px;">
+                        <span class="input-group-addon bg-blue bordered-blue">CPC</span>
+                      </div>
+                    </div>
+                    <div class="ticket-time col-lg-5 col-md-6 col-xs-6">
+                      <div class="progress progress progress-striped" style="position:relative;">
+                        <span style="position:absolute;z-index:100;font-size: 14px;padding-left: 5px;margin: 0;top: 0;line-height: 20px;">{{ cpn.Stats.DailyImps | number }} of {{ cpn.DailyImpsLimit | number }} <span ng-show="cpn.TrackingMethod == 0">Impressions</span><span ng-show="cpn.TrackingMethod == 1">Verifications</span><span ng-show="cpn.TrackingMethod == 2">Loads</span></span>
+                        <div class="progress-bar" style="width: {{ (cpn.Stats.DailyImps / (cpn.DailyImpsLimit + 1)) * 100 }}%"
+                          ng-class="{ 'progress-bar-danger': ((cpn.Stats.DailyImps / (cpn.DailyImpsLimit + 1)) <= .2),
+                                      'progress-bar-warning': ((cpn.Stats.DailyImps / (cpn.DailyImpsLimit + 1)) > .2 && (cpn.Stats.DailyImps / (cpn.DailyImpsLimit + 1)) < .6),
+                                    'progress-bar-success': ((cpn.Stats.DailyImps / (cpn.DailyImpsLimit + 1)) > 1)}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div ui-view></div>
+
+</div>

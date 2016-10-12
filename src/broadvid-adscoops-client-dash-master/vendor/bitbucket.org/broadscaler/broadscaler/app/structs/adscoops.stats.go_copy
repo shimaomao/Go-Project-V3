@@ -1,0 +1,141 @@
+package structs
+
+import (
+	"fmt"
+	"time"
+)
+
+func getDayStart() time.Time {
+	loc, _ := time.LoadLocation("America/Los_Angeles")
+
+	local := time.Now().In(loc)
+
+	return time.Date(local.Year(), local.Month(), local.Day(), 0, 0, 0, 0, loc)
+}
+
+/*GetDailyImpressionsCountByVertical gets the daily counts broken down by loads, engagements and clicks */
+func (s *Trackings) GetDailyImpressionsCountByVertical(trackingMethod uint) {
+	today := getDayStart()
+
+	query := AdscoopsDB.Select("DISTINCT FORMAT(SUM(C2.daily_limit),0) as engagement, FORMAT(SUM(C2.count), 0) as count, FORMAT(SUM(C2.revenue),2) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
+	LEFT OUTER JOIN(
+			SELECT DISTINCT adscoop_campaigns.id as campaign_id, adscoop_campaigns.daily_imps_limit as daily_limit, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
+							 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count
+							 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count
+						END) as count, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count * temp_stats.revenue
+					END) as revenue
+			FROM adscoop_trackings
+			JOIN adscoop_urls ON adscoop_urls.id = temp_stats.url_id
+			JOIN adscoop_campaigns ON adscoop_campaigns.id = adscoop_urls.campaign_id
+			WHERE timeslice >= '%s'
+			GROUP BY adscoop_campaigns.id
+		) C2 on adscoop_campaigns.id = C2.campaign_id
+	`, today.UTC().String())).
+		Where("tracking_method = ?", trackingMethod)
+
+	query.Find(&s)
+}
+
+/*GetDailyImpressionsCount gets the click count for the day */
+func (s *Trackings) GetDailyImpressionsCount() {
+	today := getDayStart()
+
+	AdscoopsDB.Select("DISTINCT FORMAT(SUM(C2.daily_limit),0) as engagement, FORMAT(SUM(C2.count), 0) as count, FORMAT(SUM(C2.revenue),2) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
+LEFT OUTER JOIN(
+		SELECT DISTINCT adscoop_campaigns.id as campaign_id, adscoop_campaigns.daily_imps_limit as daily_limit, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
+						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count
+						 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count
+					END) as count, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count * temp_stats.revenue
+					END) as revenue
+		FROM temp_stats
+		JOIN adscoop_urls ON adscoop_urls.id = temp_stats.url_id
+		JOIN adscoop_campaigns ON adscoop_campaigns.id = adscoop_urls.campaign_id
+		WHERE timeslice >= '%s'
+		GROUP BY adscoop_campaigns.id
+	) C2 on adscoop_campaigns.id = C2.campaign_id
+`, today.UTC().String())).Find(&s)
+}
+
+type TrackingRows []Trackings
+
+func (s *TrackingRows) GetDailyImpressionsCountByVertical(trackingMethod uint) {
+	today := getDayStart()
+
+	query := AdscoopsDB.Select("DISTINCT C2.timeslice, FORMAT(SUM(C2.daily_limit),0) as engagement, FORMAT(SUM(C2.count), 0) as count, FORMAT(SUM(C2.revenue),2) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
+	LEFT OUTER JOIN(
+			SELECT DISTINCT timeslice, adscoop_campaigns.id as campaign_id, adscoop_campaigns.daily_imps_limit as daily_limit, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
+							 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count
+							 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count
+						END) as count, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count * temp_stats.revenue
+					END) as revenue
+			FROM temp_stats
+			JOIN adscoop_urls ON adscoop_urls.id = temp_stats.url_id
+			JOIN adscoop_campaigns ON adscoop_campaigns.id = adscoop_urls.campaign_id
+			WHERE timeslice >= '%s'
+			GROUP BY adscoop_campaigns.id, timeslice
+		) C2 on adscoop_campaigns.id = C2.campaign_id
+	`, today.UTC().String())).
+		Where("tracking_method = ? AND count >= 1", trackingMethod)
+
+	query = query.Group("C2.timeslice")
+
+	query.Find(&s)
+}
+
+func (t *TrackingRows) ForClient(clientID uint, trackingMethod uint) (uint, error) {
+	var tr []Trackings
+	today := getDayStart()
+	AdscoopsDB.LogMode(true)
+	query := AdscoopsDB.Select("DISTINCT C2.timeslice, FORMAT(SUM(C2.daily_limit),0) as engagement, FORMAT(SUM(C2.count), 0) as count, SUM(C2.count) as `load`, FORMAT(SUM(C2.revenue),2) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
+	LEFT OUTER JOIN(
+			SELECT DISTINCT timeslice, adscoop_campaigns.id as campaign_id, adscoop_campaigns.daily_imps_limit as daily_limit, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
+							 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count
+							 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count
+						END) as count, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count * temp_stats.revenue
+						 WHEN adscoop_campaigns.tracking_method = 2 THEN temp_stats.load_count * temp_stats.revenue
+					END) as revenue
+			FROM temp_stats
+			JOIN adscoop_urls ON adscoop_urls.id = temp_stats.url_id
+			JOIN adscoop_campaigns ON adscoop_campaigns.id = adscoop_urls.campaign_id
+			WHERE timeslice >= '%s'
+			GROUP BY adscoop_campaigns.id, timeslice
+		) C2 on adscoop_campaigns.id = C2.campaign_id
+	`, today.UTC().String())).
+		Where("tracking_method = ? AND count >= 1 AND adscoop_campaigns.client_id = ?", trackingMethod, clientID)
+
+	query = query.Group("C2.timeslice")
+
+	var impCount uint
+
+	err := query.Find(&tr).Error
+
+	for _, r := range tr {
+		impCount += r.Load
+
+		*t = append(*t, r)
+	}
+
+	return impCount, err
+}
+
+type Trackings struct {
+	Timeslice  time.Time
+	RedirectID uint
+	UrlID      uint
+	Count      string
+	Cpc        string
+	Engagement string
+	Load       uint
+	TimeOnSite string
+}
+
+func (t Trackings) TableName() string {
+	return "adscoop_trackings"
+}

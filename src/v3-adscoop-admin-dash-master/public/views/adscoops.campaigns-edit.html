@@ -1,0 +1,100 @@
+<style>
+  .modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+  }
+</style>
+
+<div ng-controller="AdscoopCampaignsEditCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" ui-sref="admin.adscoops" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myLargeModalLabel" ng-bind="campaign.Name"></h4>
+      </div>
+      <div class="modal-body">
+        <div ng-include="'/views/adscoops.campaigns-general.html'"></div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="widget">
+              <div class="widget-header">
+                <div class="widget-caption">URL's</div>
+              </div>
+              <div class="widget-body">
+                <div class="form-group">
+                  <div class="input-group">
+                    <textarea class="form-control" ng-model="uNew" placeholder="Enter one URL per line to add or re-enable"></textarea>
+                    <div class="input-group-btn">
+                      <span class="btn btn-primary" ng-click="addUrl()">Add</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th width="90%">Active URL</th>
+              <th width="10%">Weight</th>
+              <th width="5%" style="width:10px;">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="u in campaign.urls">
+              <td>
+                <span ng-bind="u.Url"></span>
+                <input type="hidden" name="url[]" ng-value="u.Url">
+              </td>
+              <td>
+                <input type="number" name="weight[]" ng-model="u.Weight" class="form-control">
+              </td>
+              <td colspan="1">
+                <span class="btn btn-xs btn-danger" ng-click="removeUrl($index)">Remove</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-condensed table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Paused URL</th>
+              <th style="width:10px;">Reactivate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="u in campaign.all_urls">
+              <td>
+                <span ng-bind="u.Url"></span>
+              </td>
+              <td colspan="1">
+                <span class="btn btn-xs btn-success" ng-click="reactivateUrl($index)">Reactivate URL</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" ui-sref="admin.adscoops.clients-edit.viewcampaigns({id: campaign.ClientID })">Show Client Campaigns</button>
+        <button type="button" class="btn btn-default pull-left" ui-sref="admin.adscoops.clients-edit.viewcampaigns.edit.viewschedules({id: campaign.ClientID })">Show Schedules Campaigns</button>
+        <button type="button" class="btn btn-default pull-left" ui-sref="admin.adscoops.clients-edit({id: campaign.ClientID })">Edit Client</button>
+        <button type="button" class="btn btn-warning" ui-sref="admin.adscoops">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="saveCampaign()">Save</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<div ui-view></div>
+
+<!-- ngInclude: partials/adscoops.campaigns-general.html -->

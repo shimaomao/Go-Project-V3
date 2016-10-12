@@ -1,0 +1,269 @@
+<style>
+.modal .modal-body {
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+</style>
+
+<div class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel" ng-bind="client.Name"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                    <input type="text" class="form-control" ng-model="client.Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Daily Imps Limit</label>
+                                    <input type="text" class="form-control" ng-model="client.DailyImpsLimit">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Default CPC</label>
+                                    <input type="text" class="form-control" ng-model="client.DefaultCpc">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.Paused" class="colored-danger">
+                                        <span class="text">Paused?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.EnableReporting"> 
+                                        <span class="text">Enable Reporting?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="well well-sm" ng-show="client.EnableReporting === true">
+                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="client.HourlyReporting">
+                                            <span class="text">Enable Hourly Reporting?</span>
+                                        </label>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="client.BreakDownReportByHour">
+                                            <span class="text">Break Down Report By Hour?</span>
+                                        </label>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="client.EnableReportAccountBalance">
+                                            <span class="text">Enable Account Balance?</span>
+                                        </label>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="client.ShowMtdSpendInReport">
+                                            <span class="text">Show MTD Spend in Report?</span>
+                                        </label>
+                                    </div>
+                                </div>                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" ng-model="client.EnhancedReporting">
+                                            <span class="text">Enhanced Reporting?</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.EnableClientLogin">
+                                        <span class="text">Enable Client Login?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.ClientSchedulesPendApproval">
+                                        <span class="text">Client Submitted Schedules always need approval before taking live?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.ApprovedToCharge">
+                                        <span class="text">Approve to auto charge?</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="client.InGoodStanding">
+                                        <span class="text">In Good Standing?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="chargeAmount">Charge Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" ng-model="client.ChargeAmount" class="form-control">
+                                    <span class="input-group-addon">
+                                        <span class="label label-danger">No Card On File</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="widget">
+                                <div class="widget-header bordered-bottom bordered-sky">
+                                    <span class="widget-caption">E-mails</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <textarea class="form-control" ng-model="eNew" placeholder="Enter one e-mail per line to add or re-enable"></textarea>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-primary" ng-click="addEmail()">Add</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td class="text-right">&nbsp;</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="e in client.Emails">
+                                            <td ng-bind="e"></td>
+                                            <td class="text-right">
+                                                <button class="btn btn-default btn-xs shiny icon-only danger" ng-click="removeEmail($index);"><i class="fa fa-times"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget">
+                                <div class="widget-header widget-header bordered-bottom bordered-sky">
+                                    <span class="widget-caption">E-mails for campaign auto-pause</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <textarea class="form-control" ng-model="eClientNew" placeholder="Enter one e-mail per line to add or re-enable"></textarea>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-primary" ng-click="addCampaignEmail()">Add</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <td>Email</td>
+                                                <td class="text-right">&nbsp;</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="e in client.CampaignEmails">
+                                                <td ng-bind="e"></td>
+                                                <td class="text-right">
+                                                    <button class="btn btn-default btn-xs shiny icon-only danger" ng-click="removeCampaignEmail($index)"><i class="fa fa-times"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" ng-show="client.ID != 0">
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <span class="widget-caption">Charge Transactions</span>
+                                    <div class="widget-buttons buttons-bordered">
+                                        <button ui-sref="adscoops.clients-edit.manual-charge" class="btn btn-blue btn-xs">Manual Charge</button>
+                                    </div>
+                                    <div class="widget-buttons buttons-bordered">
+                                        <button ui-sref="adscoops.clients-edit.auto-charge" class="btn btn-palegreen btn-xs">Auto Charge</button>
+                                    </div>
+                                </div>
+                                <div class="widget-body">
+                                        <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Amount Charged</th>
+                                                <th>Transaction ID</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="t in client.Transactions">
+                                                <td ng-bind="t.AmountCharged"></td>
+                                                <td ng-bind="t.TransactionId"></td>
+                                                <td ng-bind="t.CreatedAt"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-hide="client.ID < 1" type="button" class="btn btn-default pull-left" ui-sref="adscoops.clients-edit.viewcampaigns">View Campaigns</button>
+                    <button type="button" class="btn btn-warning" ui-sref="adscoops">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveClient()">Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div ui-view></div>

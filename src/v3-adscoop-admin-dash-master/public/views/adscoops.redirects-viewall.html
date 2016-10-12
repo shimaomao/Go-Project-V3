@@ -1,0 +1,53 @@
+<div ng-controller="AdscoopRedirectsViewallCtrl" class="modal fade.in modal-open" tabindex="-1" role="dialog" id="myModal" style="display:block;">
+  <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" ui-sref="admin.adscoops" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myLargeModalLabel">View Redirects</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="search" placeholder="Filter by name" ng-model="search.Name" class="form-control">
+                    </div>
+                      <div class="col-md-6">
+                        <input type="search" placeholder="Filter by hash" ng-model="search.Hash" class="form-control">
+                      </div>
+                  </div>
+                	<table datatable="ng" class="table table-condensed table-striped">
+                		<thead>
+                			<tr>
+                				<th>Name</th>
+                				<th colspan="2">
+                                    <span class="pull-left">
+                                        Link
+                                    </span>
+                                    <div class="pull-right">
+                                        <span class="btn btn-xs btn-primary" ng-click="search.HideFromDash = !search.HideFromDash">
+                                            <span ng-show="search.HideFromDash">Show Only Visible</span>
+                                            <span ng-show="!search.HideFromDash">Show Only Hidden</span>
+                                        </span>
+                                    </div>
+                                </th>
+                			</tr>
+                		</thead>
+                        <input type="checkbox" name="showHidden" id="showHidden" ng-model="search.HideFromDash" value="false">
+                		<tbody>
+                			<tr ng-repeat="redirect in redirects | filter:search">
+                			    <td ng-bind="redirect.Name"></td>
+                			    <td ng-bind="redirect.Hash"></td>
+                			    <td>
+                			    	<a ui-sref="admin.adscoops.redirects-edit({id: redirect.ID })" class="btn btn-xs btn-info pull-right">
+                			    		Edit
+                			    	</a>
+                			    </td>
+                			</tr>
+                		</tbody>
+                	</table>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div ui-view></div>
