@@ -1,12 +1,11 @@
 package paymentController
 
 import (
-
 	"github.com/gin-gonic/gin"
 	"time"
-
 )
-func Setup( m *gin.Engine) {
+
+func Setup(m *gin.Engine) {
 
 	//   m.SetHTMLTemplate("layout")
 
@@ -23,7 +22,7 @@ func processPayments() {
 	controllerCheckExpiredClients()
 	controllerCsv()
 	ticker := time.NewTicker(time.Minute * 1)
-	for _= range ticker.C {
+	for _ = range ticker.C {
 		controllerCheckPayments()
 		controllerCheckExpiringClients()
 		controllerCheckExpiredClients()

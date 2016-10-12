@@ -11,9 +11,9 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/olekukonko/tablewriter"
 
+	"github.com/gin-gonic/gin"
 	"helpers"
 	"structs"
-	"github.com/gin-gonic/gin"
 )
 
 func clientsViewRedirStatsCtrl(c *gin.Context) {

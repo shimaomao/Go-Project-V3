@@ -4,9 +4,9 @@ import (
 	log "github.com/Sirupsen/logrus"
 
 	"adscoops.caches"
+	"github.com/gin-gonic/gin"
 	"helpers"
 	"structs"
-	"github.com/gin-gonic/gin"
 )
 
 func campaignsViewallCtrl(c *gin.Context) {

@@ -8,7 +8,6 @@ import (
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/markbates/goth/gothic"
-
 )
 
 /*Setup is to set up the controllers for the admin for adscoops and broadvids*/

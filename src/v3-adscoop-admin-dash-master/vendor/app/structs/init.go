@@ -3,11 +3,11 @@ package structs
 import (
 	"time"
 
+	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
 	"github.com/patrickmn/go-cache"
 	"log"
-	"fmt"
 )
 
 var (

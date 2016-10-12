@@ -1,9 +1,9 @@
 package apiControllers
 
 import (
+	"github.com/gin-gonic/gin"
 	"helpers"
 	"structs"
-	"github.com/gin-gonic/gin"
 )
 
 func broadvidVideosDomainsViewallCtrl(c *gin.Context) {

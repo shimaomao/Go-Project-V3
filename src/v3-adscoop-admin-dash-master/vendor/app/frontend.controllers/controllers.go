@@ -8,25 +8,22 @@ import (
 	"strconv"
 	"strings"
 	//"text/template"
-	"github.com/unrolled/render"
 	"app/structs"
+	"github.com/gin-gonic/gin"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
-	"github.com/gin-gonic/gin"
-
+	"github.com/unrolled/render"
 )
 
 var store = sessions.NewCookieStore([]byte("349qg8nmzxd;glksagh938qaghas;glksahgd"))
 
 //var templates = template.Must(template.ParseFiles("./public/views/templates/tracking.tmpl.js", "./public/views/templates/tracking.tmpl.js"))
 
-
 var TSC structs.TempStatsContainer
 var r *render.Render
-var td  = ClickStats{}
+var td = ClickStats{}
 
 func controllerTrackingJs(c *gin.Context) {
-
 
 	req := c.Request
 	//log.Println("gin context",c)
@@ -54,7 +51,7 @@ func controllerLoadClient(c *gin.Context) {
 
 	req := c.Request
 
-	data :=req.URL.Query().Get("_ast")
+	data := req.URL.Query().Get("_ast")
 	ast := strings.Split(data, "_")
 	host := getAdscoopHostById(ast[0], false)
 	retData.Host = host.Host
@@ -83,7 +80,7 @@ func controllerLoadClient(c *gin.Context) {
 		log.Println("LOG LOG LOG enable_unload_tracking", val)
 	}
 
-	c.HTML(http.StatusOK,"loadClient.tmpl.js", retData)
+	c.HTML(http.StatusOK, "loadClient.tmpl.js", retData)
 
 }
 
@@ -127,7 +124,7 @@ func controllerTrackLoad(c *gin.Context) {
 	c.Header("Expires", "0")
 	c.Header("Content-type", "image/jpg")
 
-	req :=c.Request
+	req := c.Request
 
 	session, _ := store.Get(req, "asdata")
 
@@ -163,7 +160,7 @@ func controllerTrackTimeOnSite(c *gin.Context) {
 	c.Header("Expires", "0")
 	c.Header("Content-type", "image/jpg")
 
-	req :=c.Request
+	req := c.Request
 
 	session, _ := store.Get(req, "asdata")
 
@@ -200,7 +197,7 @@ func controllerFeed(c *gin.Context) {
 	c.Header("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate")
 	c.Header("Expires", "0")
 
-	req :=c.Request
+	req := c.Request
 
 	params := mux.Vars(req)
 
@@ -250,7 +247,7 @@ func controllerFeed(c *gin.Context) {
 func controllerValidUser(c *gin.Context) {
 	c.Header("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate")
 	c.Header("Expires", "0")
-	req :=c.Request
+	req := c.Request
 	retData := LoadRetData(c)
 
 	session, _ := store.Get(req, "asdata_flash")
@@ -269,7 +266,7 @@ func controllerLastUpdated(c *gin.Context) {
 
 func controllerRedirect(c *gin.Context) {
 	var trackingValue uint32
-	req :=c.Request
+	req := c.Request
 	trackingValue = setTrackingValue(trackingValue, req)
 
 	c.Writer.Header().Set("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate")
@@ -423,7 +420,7 @@ func controllerRedirectUrl(c *gin.Context) {
 	c.Header("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate")
 	c.Header("Expires", "0")
 	var trackingValue uint32
-	req :=c.Request
+	req := c.Request
 	trackingValue = setTrackingValue(trackingValue, req)
 	retData := LoadRetData(c)
 	retData.AdscoopRedirect.BustIframe = false
@@ -599,7 +596,7 @@ func redirectUrl(w http.ResponseWriter, req *http.Request, retData *RetData, tra
 }
 
 func LoadRetData(c *gin.Context) (retData RetData) {
-	req :=c.Request
+	req := c.Request
 	params := mux.Vars(req)
 
 	retData.AllowRefresh = true

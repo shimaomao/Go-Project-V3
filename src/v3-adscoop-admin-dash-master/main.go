@@ -1,17 +1,15 @@
 package main
 
 import (
-	"os"
+	"app"
 	"app/configSettting"
 	log "github.com/Sirupsen/logrus"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
-	"app"
+	"os"
 )
-
-
 
 func main() {
 	gin.SetMode(gin.ReleaseMode)

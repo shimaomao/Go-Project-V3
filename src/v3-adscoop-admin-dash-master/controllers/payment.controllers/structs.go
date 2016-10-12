@@ -6,15 +6,15 @@ import (
 	"log"
 	"time"
 
+	"app/configSettting"
+	"app/structs"
 	"github.com/mailgun/mailgun-go"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/charge"
-	"app/structs"
-	"app/configSettting"
-	
 )
 
-var db =structs.AdscoopsDB
+var db = structs.AdscoopsDB
+
 type TomlConfig struct {
 	MysqlConfig         string
 	StripeSecretKey     string
@@ -201,7 +201,6 @@ type StripeData struct {
 	StripeTokenType string `form:"stripeTokenType"`
 	StripeEmail     string `form:"stripeEmail"`
 }
-
 
 type AdscoopClientEmail struct {
 	Id        int64

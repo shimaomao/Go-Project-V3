@@ -1,32 +1,26 @@
 package paymentController
 
 import (
-
-  "fmt"
+	"fmt"
 	"github.com/gin-gonic/gin"
-       "net/http"
+	"net/http"
 
-	"app/structs"
 	"app/configSettting"
+	"app/structs"
 
+	"encoding/csv"
+	"github.com/mailgun/mailgun-go"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/customer"
-	"github.com/mailgun/mailgun-go"
 	"log"
-	"encoding/csv"
 	"os"
-	"time"
 	"strings"
-
+	"time"
 )
 
-
-
-
-
 //var db  structs.AdscoopsDB
-func controllerPaymentHash(c *gin.Context){
-	db :=structs.AdscoopsDB
+func controllerPaymentHash(c *gin.Context) {
+	db := structs.AdscoopsDB
 
 	var retData struct {
 		AdscoopClient AdscoopClient
@@ -36,7 +30,7 @@ func controllerPaymentHash(c *gin.Context){
 	}
 
 	retData.Config = TomlConfig{}
-     hashKey := c.Param("hash")
+	hashKey := c.Param("hash")
 	db.Where("hash = ?", hashKey).Find(&retData.AdscoopPaymentHash)
 	if retData.AdscoopPaymentHash.Id == 0 {
 		fmt.Println("Payment hash not valid")
@@ -52,24 +46,23 @@ func controllerPaymentHash(c *gin.Context){
 		return
 	}
 
-
 	c.HTML(http.StatusOK, "payment.tmpl", retData)
 
 }
 
-func  controllerPaymentHashPost(c *gin.Context){
+func controllerPaymentHashPost(c *gin.Context) {
 
 	fmt.Println("Hey sdsad")
 	fmt.Println(StripeData{})
-	db :=structs.AdscoopsDB
-	sd:= StripeData{}
+	db := structs.AdscoopsDB
+	sd := StripeData{}
 	fmt.Println("PRINTED STRIPED")
 	fmt.Println(sd)
-	err :=c.Bind(&sd)
+	err := c.Bind(&sd)
 	hashKey := c.Param("hash")
 
-	log.Println("PAYMENT"+sd.StripeToken)
-	if sd.PaymentHash !=hashKey {
+	log.Println("PAYMENT" + sd.StripeToken)
+	if sd.PaymentHash != hashKey {
 		log.Println("Hashes do not match")
 		return
 	}
@@ -113,7 +106,6 @@ func  controllerPaymentHashPost(c *gin.Context){
 		Email: sd.StripeEmail,
 	}
 
-
 	customerParams.SetSource(sd.StripeToken) // obtained with Stripe.js
 	cu, err := customer.New(customerParams)
 
@@ -134,23 +126,14 @@ func  controllerPaymentHashPost(c *gin.Context){
 		m := mailgun.NewMessage("donotnreply <donotreply@mg.adscoops.com>", fmt.Sprintf("Adscoops: %s has updated their payment information", asc.Name), fmt.Sprintf("%s has updated their payment information", asc.Name), configSettting.AdminEmail)
 		gun.Send(m)
 
-
-
-
-
-
-
 	}()
 
 	c.HTML(http.StatusOK, "payment_success.tmpl", nil)
 
-
-
-
 }
 
- func controllerCheckPayments() {
-	 db := structs.AdscoopsDB
+func controllerCheckPayments() {
+	db := structs.AdscoopsDB
 	var asc []AdscoopClient
 
 	db.Select("adscoop_clients.*").
@@ -190,10 +173,9 @@ func  controllerPaymentHashPost(c *gin.Context){
 	}
 }
 
-
 func controllerCheckExpiringClients() {
 	var asc []AdscoopClient
-	db :=structs.AdscoopsDB
+	db := structs.AdscoopsDB
 	db.Select("adscoop_clients.*").
 		Joins(`LEFT OUTER JOIN (
 			SELECT DISTINCT client_id, SUM(amount_charged) as amount_charged
@@ -516,7 +498,3 @@ func controllerCsv() {
 		os.Remove("report.csv")
 	}
 }
-
-
-
-

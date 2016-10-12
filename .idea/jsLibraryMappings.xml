@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/src/v3-adscoop-admin-dash-master/public" libraries="{v3/src/v3-adscoop-admin-dash-master/public/node_modules}" />
-  </component>
-</project>

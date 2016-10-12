@@ -8,7 +8,6 @@ import (
 	//"github.com/martini-contrib/render"
 	//"github.com/unrolled/render"
 	"github.com/jinzhu/gorm"
-
 )
 
 var AdscoopsDB *gorm.DB
@@ -16,13 +15,10 @@ var AdscoopsRealtimeDB *gorm.DB
 var BroadvidDB *gorm.DB
 var RedisPool *redis.Pool
 var Cache *cache.Cache
+
 /*var TSC structs.TempStatsContainer
 var Ren *render.Render
 var TD  =structs.ClickStats{}*/
-
-
-
-
 
 const (
 	RedisAuthPassword            = "broadvid123!!!"

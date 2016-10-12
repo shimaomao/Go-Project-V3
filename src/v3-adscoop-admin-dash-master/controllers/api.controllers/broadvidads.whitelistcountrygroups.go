@@ -1,9 +1,9 @@
 package apiControllers
 
 import (
+	"github.com/gin-gonic/gin"
 	"helpers"
 	"structs"
-	"github.com/gin-gonic/gin"
 )
 
 func broadvidWhitelistCountryGroupsViewallCtrl(c *gin.Context) {

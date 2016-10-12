@@ -110,14 +110,10 @@ func FindVisible(object structs.GroupVisbleIntf, c *gin.Context) {
 
 	err = object.FindVisible(userID)
 
-
-
 	if err != nil {
 		c.JSON(500, err)
 		return
 	}
-
-
 
 	c.JSON(200, object)
 }

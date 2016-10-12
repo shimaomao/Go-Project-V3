@@ -67,9 +67,8 @@ var renderFloatPrecisionRounders = [10]float64{
 	0.0000000005,
 }
 
-func test_control()  {
+func test_control() {
 
-	
 }
 func RenderFloat(format string, n float64) string {
 	// Special cases:
@@ -196,6 +195,6 @@ func RenderFloat(format string, n float64) string {
 func RenderInteger(format string, n int) string {
 	return RenderFloat(format, float64(n))
 }
-func test()  {
-	
+func test() {
+
 }

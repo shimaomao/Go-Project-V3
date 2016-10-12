@@ -6,10 +6,10 @@ import (
 	"log"
 	"math"
 	//"strconv"
+	"app/adscoops.caches"
+	"app/structs"
 	"sync"
 	"time"
-	"app/structs"
-	"app/adscoops.caches"
 
 	"strconv"
 )
@@ -50,8 +50,6 @@ type UrlTrackingMethod struct {
 
 var urlTrackingMethod UrlTrackingMethod
 
-
-
 type trackingData struct {
 	RedirectID       uint
 	UrlID            uint
@@ -84,7 +82,6 @@ func (t *ClickStats) Add(ast *AdscoopTracking, trackingType int64) {
 			ts.Revenue = s
 		}
 	}
-
 
 	ts.UrlID = uint(ast.UrlId)
 

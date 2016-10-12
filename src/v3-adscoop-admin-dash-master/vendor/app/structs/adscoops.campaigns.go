@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
-	"github.com/patrickmn/go-cache"
 	"app/shared-structs/structs"
+	log "github.com/Sirupsen/logrus"
 	"github.com/jinzhu/gorm"
+	"github.com/patrickmn/go-cache"
 )
 
 type Campaign struct {

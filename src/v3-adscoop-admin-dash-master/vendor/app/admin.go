@@ -1,31 +1,28 @@
 package app
 
-
 import (
-"encoding/json"
-"os"
-"strings"
+	"encoding/json"
+	"os"
+	"strings"
 
-// "os"
-// "strings"
-"time"
+	// "os"
+	// "strings"
+	"time"
 
-log "github.com/Sirupsen/logrus"
+	log "github.com/Sirupsen/logrus"
 
-
-"github.com/garyburd/redigo/redis"
-ginsessions "github.com/gin-gonic/contrib/sessions"
-"github.com/gin-gonic/gin"
-"github.com/patrickmn/go-cache"
 	"app/api.controllers"
+	"github.com/garyburd/redigo/redis"
+	ginsessions "github.com/gin-gonic/contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/patrickmn/go-cache"
 
-	"app/janitor"
-	"app/structs"
-	"app/payment.controllers"
 	"app/adscoops.caches"
 	"app/configSettting"
 	"app/frontend.controllers"
-
+	"app/janitor"
+	"app/payment.controllers"
+	"app/structs"
 )
 
 var tsc structs.TempStatsContainer
@@ -71,7 +68,7 @@ func InitAdmin() {
 	apiControllers.RedisPool = configSettting.RedisPool
 
 	apiControllers.Setup(m)
-        paymentController.Setup(m)
+	paymentController.Setup(m)
 	frontendControllers.Setup(m)
 
 	adscoopsCaches.AdscoopsDB = configSettting.AdscoopsDB
@@ -89,4 +86,3 @@ func InitAdmin() {
 	m.Run()
 
 }
-

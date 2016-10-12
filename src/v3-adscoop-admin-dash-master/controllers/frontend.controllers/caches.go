@@ -1,25 +1,21 @@
 package frontendControllers
 
 import (
+	"app/adscoops.caches"
+	"app/structs"
 	"bytes"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	log "github.com/Sirupsen/logrus"
+	"github.com/garyburd/redigo/redis"
+	"github.com/patrickmn/go-cache"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 	"time"
-	log "github.com/Sirupsen/logrus"
-	"app/adscoops.caches"
-	"app/structs"
-	"github.com/garyburd/redigo/redis"
-	"github.com/patrickmn/go-cache"
-
-
 )
-
-
 
 func startCachesTimer() {
 	updateCaches()

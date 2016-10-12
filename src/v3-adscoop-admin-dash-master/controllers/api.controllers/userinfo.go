@@ -1,9 +1,9 @@
 package apiControllers
 
 import (
-	"structs"
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"structs"
 )
 
 func UserInfoCtrl(c *gin.Context) {
