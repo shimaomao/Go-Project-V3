@@ -2,7 +2,7 @@ package apiControllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"structs"
+	"app/structs"
 )
 
 func hostsViewallCtrl(c *gin.Context) {

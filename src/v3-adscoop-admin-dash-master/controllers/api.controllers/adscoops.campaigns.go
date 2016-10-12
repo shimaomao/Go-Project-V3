@@ -3,10 +3,10 @@ package apiControllers
 import (
 	log "github.com/Sirupsen/logrus"
 
-	"adscoops.caches"
+	"app/adscoops.caches"
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func campaignsViewallCtrl(c *gin.Context) {

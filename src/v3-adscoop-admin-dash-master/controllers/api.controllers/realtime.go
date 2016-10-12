@@ -8,8 +8,8 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 
-	"sockets"
-	"structs"
+	"app/sockets"
+	"app/structs"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"

@@ -6,7 +6,7 @@ import (
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/markbates/goth/gothic"
-	"structs"
+	"app/structs"
 )
 
 func AuthCallbackCtrl(c *gin.Context) {

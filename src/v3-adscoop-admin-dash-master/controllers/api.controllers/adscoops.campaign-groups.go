@@ -3,8 +3,8 @@ package apiControllers
 import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func campaignGroupssViewallCtrl(c *gin.Context) {

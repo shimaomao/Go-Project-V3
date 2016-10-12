@@ -12,8 +12,8 @@ import (
 	"github.com/olekukonko/tablewriter"
 
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func clientsViewRedirStatsCtrl(c *gin.Context) {

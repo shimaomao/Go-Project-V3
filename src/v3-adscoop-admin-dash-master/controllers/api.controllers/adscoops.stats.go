@@ -1,7 +1,7 @@
 package apiControllers
 
 import (
-	"structs"
+	"app/structs"
 
 	"github.com/gin-gonic/gin"
 )

@@ -3,8 +3,8 @@ package apiControllers
 import (
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func broadvidadsAdEmbedsRemoveCtrl(c *gin.Context) {

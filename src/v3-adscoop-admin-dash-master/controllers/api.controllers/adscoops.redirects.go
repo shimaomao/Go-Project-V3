@@ -1,10 +1,10 @@
 package apiControllers
 
 import (
-	"adscoops.caches"
+	"app/adscoops.caches"
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func redirectsViewallCtrl(c *gin.Context) {

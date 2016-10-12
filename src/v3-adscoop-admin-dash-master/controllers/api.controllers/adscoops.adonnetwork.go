@@ -1,9 +1,9 @@
 package apiControllers
 
 import (
-	"adonnetwork"
+	"app/adonnetwork"
 	"github.com/gin-gonic/gin"
-	"helpers"
+	"app/helpers"
 )
 
 func adonNetworkCampaignsViewAllCtrl(c *gin.Context) {

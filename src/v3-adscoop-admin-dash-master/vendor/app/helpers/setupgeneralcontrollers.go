@@ -10,7 +10,7 @@ import (
 	"app/structs"
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"os"
+
 )
 
 func GetUserID(c *gin.Context) (uid uint, err error) {

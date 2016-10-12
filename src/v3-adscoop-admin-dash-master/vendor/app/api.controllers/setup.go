@@ -8,6 +8,7 @@ import (
 	ginsessions "github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/markbates/goth/gothic"
+
 )
 
 /*Setup is to set up the controllers for the admin for adscoops and broadvids*/
@@ -141,6 +142,7 @@ func Setup(m *gin.Engine) {
 			ascstats.GET("/getRealTimeStats/today", statsRealTimeTodayCtrl)
 			ascstats.GET("/getRealTimeStats/yesterday", statsRealTimeYesterdayCtrl)
 			ascstats.GET("/getRealTimeClientStats", statsRealTimeClientCtrl)
+
 		}
 	}
 
@@ -276,5 +278,6 @@ func Setup(m *gin.Engine) {
 	auth.GET("/adscoopsupdates", AdscoopsRealtimeUpdatesCtrl)
 
 	go statsUpdates()
+
 
 }

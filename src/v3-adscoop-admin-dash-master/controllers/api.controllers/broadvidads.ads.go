@@ -2,8 +2,8 @@ package apiControllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"helpers"
-	"structs"
+	"app/helpers"
+	"app/structs"
 )
 
 func broadvidAdsViewallCtrl(c *gin.Context) {
