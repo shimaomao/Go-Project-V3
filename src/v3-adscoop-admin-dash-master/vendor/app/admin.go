@@ -68,7 +68,6 @@ func InitAdmin() {
 	apiControllers.RedisPool = configSettting.RedisPool
 
 	apiControllers.Setup(m)
-
 	paymentController.Setup(m)
 	frontendControllers.Setup(m)
 
@@ -85,6 +84,5 @@ func InitAdmin() {
 		go janitor.Run()
 	}
 	m.Run()
-
 
 }

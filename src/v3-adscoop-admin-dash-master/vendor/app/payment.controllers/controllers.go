@@ -214,6 +214,7 @@ func controllerCheckExpiringClients() {
 }
 func controllerCheckExpiredClients() {
 	var asc []AdscoopClient
+	db := structs.AdscoopsDB
 
 	db.Select("adscoop_clients.*").
 		Joins(`LEFT OUTER JOIN (
@@ -247,6 +248,8 @@ func controllerCheckExpiredClients() {
 			AND adscoop_clients.expiration_notice = 0`).
 		Find(&asc)
 
+
+
 	for _, y := range asc {
 		y.NotifyClientExpired()
 	}
@@ -254,6 +257,7 @@ func controllerCheckExpiredClients() {
 
 func controllerCsv() {
 	var adscoopClients []AdscoopClient
+	db := structs.AdscoopsDB
 
 	location, _ := time.LoadLocation("America/Los_Angeles")
 

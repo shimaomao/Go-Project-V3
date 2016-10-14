@@ -10,6 +10,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/jinzhu/now"
+
 )
 
 // Clients
@@ -100,6 +101,7 @@ func (c Client) RedirRealtimeStats() ClientRedirectStats {
 		`, currentTime.Add(-30*time.Minute).UTC(), c.ID).
 		Scan(&retData).Error; err != nil {
 		log.Errorf("Cannot grab stats: %s", err)
+
 		return nil
 	}
 
@@ -325,6 +327,7 @@ func (c *Clients) FindAll() error {
 }
 
 func (c *Clients) FindVisible(userID uint) error {
+
 	var getClients []Client
 	if err := AdscoopsDB.Table("adscoop_clients").Where("hide_from_dash = 0 ").Find(&getClients).Error; err != nil {
 		return err
@@ -335,6 +338,7 @@ func (c *Clients) FindVisible(userID uint) error {
 			log.Errorf("Not returning client on getStats: %v, err: %s", gc.ID, err)
 			continue
 		}
+
 
 		if err := gc.getSpendData(); err != nil {
 			log.Errorf("Not returning client on getSpendData: %v, err: %s", gc.ID, err)
@@ -351,6 +355,7 @@ func (c *Clients) FindVisible(userID uint) error {
 }
 
 func (c *Client) getSpendData() (err error) {
+
 	today := getDayStart()
 
 	var retData RetRevData
@@ -358,13 +363,14 @@ func (c *Client) getSpendData() (err error) {
 
 	currentHour := getHourStart()
 
-	beginningOfMillenium := time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)
+	beginningOfMillenium := time.Date(2016, 10, 1, 0, 0, 0, 0, time.UTC)
 
 	prevRevKey := fmt.Sprintf("client_rev_%v_%s", c.ID, currentHour)
 
 	prevRev, found := Cache.Get(prevRevKey)
 
 	if !found {
+
 		query := revQuery(c.ID, beginningOfMillenium, currentHour.UTC())
 
 		err = query.Find(&revDataToday).Error
@@ -374,8 +380,10 @@ func (c *Client) getSpendData() (err error) {
 
 		Cache.Set(prevRevKey, revDataToday, time.Hour)
 	} else {
+
 		revDataToday = prevRev.(RetRevData)
 	}
+
 
 	if err := revQuery(c.ID, currentHour.UTC(), today.UTC().Add(24*time.Hour)).Scan(&retData).Error; err != nil {
 		return err
@@ -439,6 +447,7 @@ func (c *Client) getStats() error {
 	if err = c.GetRequiredImps(); err != nil {
 		return err
 	}
+
 
 	return nil
 }
@@ -530,7 +539,8 @@ func tosQuery(clientID uint, timeslice time.Time, endTimeslice time.Time) *gorm.
 }
 
 func revQuery(clientID uint, timeslice time.Time, endTimeslice time.Time) *gorm.DB {
-	return AdscoopsDB.Raw(`SELECT SUM((CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
+
+	return AdscoopsDB.LogMode(true).Raw(`SELECT SUM((CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
 					 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement
 					 WHEN adscoop_campaigns.tracking_method = 2 THEN adscoop_trackings.load
 				END) * adscoop_trackings.cpc) as total_spend

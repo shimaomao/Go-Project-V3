@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+
 )
 
 func getDayStart() time.Time {
@@ -208,7 +209,8 @@ func statsQuery(timeslice time.Time, trackingMethod uint, clientID uint) *gorm.D
 }
 
 func impsrevQuery(timeslice time.Time, endTimeslice time.Time) *gorm.DB {
-	return AdscoopsDB.Select("DISTINCT SUM(C2.daily_limit) as engagement, SUM(C2.count) as count, SUM(C2.revenue) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
+
+	return AdscoopsDB.LogMode(true).Select("DISTINCT SUM(C2.daily_limit) as engagement, SUM(C2.count) as count, SUM(C2.revenue) as cpc").Table("adscoop_campaigns").Joins(fmt.Sprintf(`
 LEFT OUTER JOIN(
 		SELECT DISTINCT adscoop_campaigns.id as campaign_id, adscoop_campaigns.daily_imps_limit as daily_limit, SUM(CASE WHEN adscoop_campaigns.tracking_method = 0 THEN count
 						 WHEN adscoop_campaigns.tracking_method = 1 THEN engagement_count

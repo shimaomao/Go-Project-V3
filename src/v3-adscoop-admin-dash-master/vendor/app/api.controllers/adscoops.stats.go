@@ -4,6 +4,7 @@ import (
 	"app/structs"
 
 	"github.com/gin-gonic/gin"
+
 )
 
 func statsRealTimeClientCtrl(c *gin.Context) {
@@ -71,6 +72,7 @@ func statsDailyImpressionCountCtrl(c *gin.Context) {
 	}
 	var trackings structs.Trackings
 	trackings.GetDailyImpressionsCount()
+
 	retData.Impressions = trackings.Count
 	retData.Limit = trackings.Engagement
 	retData.Revenue = trackings.Cpc
